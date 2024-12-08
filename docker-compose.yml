@@ -8,6 +8,7 @@ services:
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./src:/var/www/
+      - ./src/public/images:/var/www/public/images
     depends_on:
       - php
 
@@ -15,6 +16,8 @@ services:
     build: ./docker/php
     volumes:
       - ./src:/var/www/
+    ports:
+      - "8000:8000"
 
   mysql:
     image: mysql:8.0.26
