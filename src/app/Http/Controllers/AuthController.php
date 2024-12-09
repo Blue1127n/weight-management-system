@@ -27,7 +27,12 @@ class AuthController extends Controller
 
         return redirect()->route('register.step2');
     }
-    
+
+    public function showLogin()
+    {
+        return view('auth.login');
+    }
+
     public function login(WeightManagementRequest $request)
     {
         $credentials = $request->only('email', 'password');

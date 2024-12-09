@@ -45,9 +45,9 @@
             @enderror
         </div>
 
-        <button type="submit">次に進む</button>
+        <button type="submit" class="button">次に進む</button>
     </form>
-    <a href="{{ route('login') }}">ログインはこちら</a>
+    <a href="{{ route('login') }}" class="link">ログインはこちら</a>
 </div>
 @endsection
 
