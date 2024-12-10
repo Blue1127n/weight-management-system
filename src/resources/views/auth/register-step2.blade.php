@@ -14,9 +14,10 @@
     <p>STEP2 体重データの入力</p>
     <form action="{{ route('register.step2') }}" method="POST">
         @csrf
+
         <div class="form-group">
             <label for="current_weight">現在の体重</label>
-            <input type="number" name="current_weight" step="0.1" value="{{ old('current_weight') }}" placeholder="現在の体重を入力">
+            <input type="number" id="current_weight" name="current_weight" step="0.1" value="{{ old('current_weight') }}" placeholder="現在の体重を入力">
             <span class="unit">kg</span>
             @error('current_weight')
             <div class="error">
@@ -27,7 +28,7 @@
 
         <div class="form-group">
             <label for="target_weight">目標の体重</label>
-            <input type="number" name="target_weight" step="0.1" value="{{ old('target_weight') }}" placeholder="目標の体重を入力">
+            <input type="number" id="target_weight" name="target_weight" step="0.1" value="{{ old('target_weight') }}" placeholder="目標の体重を入力">
             <span class="unit">kg</span>
             @error('target_weight')
             <div class="error">
@@ -44,21 +45,25 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const formContainer = document.querySelector('.form-container');
-    const errorMessages = document.querySelectorAll('.error span');
+        const form = document.querySelector('form');
 
-    console.log('フォームコンテナ:', formContainer);
-    console.log('エラーメッセージ数:', errorMessages.length);
+        if (!form) {
+            console.error('フォームが見つかりません');
+            return;
+        }
 
-    if (formContainer && errorMessages.length > 0) {
-        console.log('エラーが検出されました');
-        formContainer.classList.add('has-errors');
-        formContainer.style.height = '746px'; // 高さを手動でセット
-    } else {
-        console.log('エラーはありません');
-        formContainer.classList.remove('has-errors');
-        formContainer.style.height = '560px'; // 通常時の高さをリセット
-    }
-});
+        // フォーム送信イベントを監視
+        form.addEventListener('submit', function (e) {
+            console.log('フォーム送信がトリガーされました');
+            
+            // フォームデータの内容を出力
+            const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                console.log(`送信データ: ${key} = ${value}`);
+            }
+
+            // ネットワークタブでPOSTリクエストが表示されるか確認
+        });
+    });
 </script>
 @endpush

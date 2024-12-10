@@ -13,11 +13,11 @@
     <div class="sub-title">新規会員登録</div>
         <p>STEP1 アカウント情報の登録</p>
     <form action="{{ route('register.step1') }}" method="POST">
-        @csrf
+    @csrf
 
         <div class="form-group">
             <label for="name">お名前</label>
-            <input type="text" name="name" value="{{ old('name') }}" placeholder="名前を入力">
+            <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="名前を入力">
             @error('name')
             <div class="error">
                 <span>{{ $message }}</span>
@@ -27,7 +27,7 @@
 
         <div class="form-group">
             <label for="email">メールアドレス</label>
-            <input type="email" name="email" value="{{ old('email') }}" placeholder="メールアドレスを入力">
+            <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="メールアドレスを入力">
             @error('email')
             <div class="error">
                 <span>{{ $message }}</span>
@@ -37,7 +37,7 @@
 
         <div class="form-group">
             <label for="password">パスワード</label>
-            <input type="password" name="password" placeholder="パスワードを入力">
+            <input type="password" id="password" name="password" placeholder="パスワードを入力">
             @error('password')
             <div class="error">
                 <span>{{ $message }}</span>
@@ -51,24 +51,3 @@
 </div>
 @endsection
 
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const formContainer = document.querySelector('.form-container');
-    const errorMessages = document.querySelectorAll('.error span');
-
-    console.log('フォームコンテナ:', formContainer);
-    console.log('エラーメッセージ数:', errorMessages.length);
-
-    if (formContainer && errorMessages.length > 0) {
-        console.log('エラーが検出されました');
-        formContainer.classList.add('has-errors');
-        formContainer.style.height = '845px'; // 高さを手動でセット
-    } else {
-        console.log('エラーはありません');
-        formContainer.classList.remove('has-errors');
-        formContainer.style.height = '721px'; // 通常時の高さをリセット
-    }
-});
-</script>
-@endpush

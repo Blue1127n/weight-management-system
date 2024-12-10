@@ -16,6 +16,6 @@
             @yield('content')
         </main>
     </div>
-</body>
     @stack('scripts')
+</body>
 </html>
