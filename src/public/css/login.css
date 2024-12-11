@@ -1,7 +1,6 @@
 /* フォームコンテナ */
 .form-container {
     width: 580px;
-    height: 500px;
     margin: 40px auto;
     padding: 40px;
     gap: 30px;
@@ -93,6 +92,7 @@
     text-decoration-skip-ink: none;
     color: rgba(246, 90, 90, 1);
     margin-top: 5px;
+    min-height: 21px; /* エラーメッセージがない場合の高さを確保 */
 }
 
 /* ログインボタン */

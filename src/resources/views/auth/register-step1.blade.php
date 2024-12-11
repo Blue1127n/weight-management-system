@@ -12,7 +12,7 @@
     <div class="logo-text">PiGLy</div>
     <div class="sub-title">新規会員登録</div>
         <p>STEP1 アカウント情報の登録</p>
-    <form action="{{ route('register.step1') }}" method="POST">
+    <form action="{{ route('register.step1') }}" method="POST" novalidate>
     @csrf
 
         <div class="form-group">

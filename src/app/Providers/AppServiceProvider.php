@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 整数部分が4桁以内かチェック
+        Validator::extend('valid_integer_part', function ($attribute, $value, $parameters, $validator) {
+            return strlen((string)floor($value)) <= 4;
+        });
+
+        // 小数点以下が1桁以内かチェック
+        Validator::extend('valid_decimal_part', function ($attribute, $value, $parameters, $validator) {
+            if (strpos((string)$value, '.') !== false) {
+                $decimals = strlen(substr(strrchr($value, '.'), 1));
+                return $decimals <= 1;
+            }
+            return true; // 小数点がなければ問題なし
+        });
     }
 }

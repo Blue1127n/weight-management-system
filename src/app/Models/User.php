@@ -45,7 +45,7 @@ class User extends Authenticatable
     /**
      * Relationship: User has one WeightTarget
      */
-    public function weightTargets()
+    public function weightTarget()
     {
         return $this->hasOne(WeightTarget::class);
     }

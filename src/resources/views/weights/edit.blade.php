@@ -57,12 +57,12 @@
         <div class="buttons">
             <button type="submit" class="button update-button">更新</button>
             <a href="{{ route('weight_logs') }}" class="button back-button">戻る</a>
-            <form action="{{ route('weight_logs.delete', $log->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="button delete-button">ゴミ箱</button>
-            </form>
         </div>
+    </form>
+    <form action="{{ route('weight_logs.delete', $log->id) }}" method="POST" class="delete-form">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="button delete-button">ゴミ箱</button>
     </form>
 </div>
 @endsection

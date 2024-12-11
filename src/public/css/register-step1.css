@@ -1,7 +1,6 @@
 /* フォームコンテナ */
 .form-container {
     width: 580px;
-    height: 721px;
     margin: 20px auto;
     padding: 40px;
     background: rgba(255, 255, 255, 1);
@@ -135,7 +134,7 @@
 
 /* エラーメッセージ */
 .error {
-    height: 21px;
+    height: auto;
     color: rgba(246, 90, 90, 1);
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 14px;
@@ -145,7 +144,7 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     margin-bottom: 10px;
-    min-height: 20px;
+    min-height: 21px;
     display: flex;
     align-items: center;
 }

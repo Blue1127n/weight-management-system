@@ -12,28 +12,24 @@
     <div class="logo-text">PiGLy</div>
     <div class="sub-title">新規会員登録</div>
     <p>STEP2 体重データの入力</p>
-    <form action="{{ route('register.step2') }}" method="POST">
+    <form action="{{ route('register.step2') }}" method="POST" novalidate>
         @csrf
 
         <div class="form-group">
             <label for="current_weight">現在の体重</label>
-            <input type="number" id="current_weight" name="current_weight" step="0.1" value="{{ old('current_weight') }}" placeholder="現在の体重を入力">
+            <input type="text" id="current_weight" name="current_weight" value="{{ old('current_weight') }}" placeholder="現在の体重を入力">
             <span class="unit">kg</span>
             @error('current_weight')
-            <div class="error">
-                <span>{{ $message }}</span>
-            </div>
+                <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="form-group">
             <label for="target_weight">目標の体重</label>
-            <input type="number" id="target_weight" name="target_weight" step="0.1" value="{{ old('target_weight') }}" placeholder="目標の体重を入力">
+            <input type="text" id="target_weight" name="target_weight" value="{{ old('target_weight') }}" placeholder="目標の体重を入力">
             <span class="unit">kg</span>
             @error('target_weight')
-            <div class="error">
-                <span>{{ $message }}</span>
-            </div>
+                <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
 
@@ -45,25 +41,18 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form');
+        const formContainer = document.querySelector('.form-container');
+        const errorMessages = document.querySelectorAll('.form-container .error-message');
 
-        if (!form) {
-            console.error('フォームが見つかりません');
-            return;
+        // 初期高さを設定
+        if (formContainer) {
+            formContainer.style.height = '560px';
         }
 
-        // フォーム送信イベントを監視
-        form.addEventListener('submit', function (e) {
-            console.log('フォーム送信がトリガーされました');
-            
-            // フォームデータの内容を出力
-            const formData = new FormData(form);
-            for (const [key, value] of formData.entries()) {
-                console.log(`送信データ: ${key} = ${value}`);
-            }
-
-            // ネットワークタブでPOSTリクエストが表示されるか確認
-        });
+        // エラーメッセージがある場合に高さを拡張
+        if (errorMessages.length > 0 && formContainer) {
+            formContainer.style.height = '746px';
+        }
     });
 </script>
 @endpush
