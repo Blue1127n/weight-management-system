@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        // 例外的にCSRFを無効化するルートを指定
+        // 'login', // 必要であればコメントを外す
     ];
 }

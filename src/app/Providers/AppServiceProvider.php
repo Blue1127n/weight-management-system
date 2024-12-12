@@ -31,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
 
         // 小数点以下が1桁以内かチェック
         Validator::extend('valid_decimal_part', function ($attribute, $value, $parameters, $validator) {
+            if (!is_numeric($value)) {
+                return false; // 数値以外は無効
+            }
+
             if (strpos((string)$value, '.') !== false) {
                 $decimals = strlen(substr(strrchr($value, '.'), 1));
                 return $decimals <= 1;

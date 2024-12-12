@@ -22,12 +22,17 @@ class WeightController extends Controller
         return view('weights.index', compact('logs', 'currentWeight', 'weightTarget'));
     }
 
+    public function create()
+{
+    return view('weights.create'); // 新規登録用のviewファイル
+}
+
     // 体重ログの登録
     public function store(WeightManagementRequest $request)
     {
         auth()->user()->weightLogs()->create($request->validated());
 
-        return redirect()->route('weight_logs')->with('success', '体重ログが登録されました。');
+        return redirect()->route('weight_logs');
     }
 
     // 検索機能
@@ -54,7 +59,7 @@ class WeightController extends Controller
         $log = WeightLog::findOrFail($weightLogId);
         $log->update($request->validated());
 
-        return redirect()->route('weight_logs')->with('success', '体重ログが更新されました。');
+        return redirect()->route('weight_logs');
     }
 
     // 体重ログの削除
@@ -64,10 +69,10 @@ class WeightController extends Controller
         $log = WeightLog::findOrFail($weightLogId);
         $log->delete();
 
-        return redirect()->route('weight_logs')->with('success', '体重ログが削除されました。');
+        return redirect()->route('weight_logs');
     } catch (\Exception $e) {
         \Log::error('体重ログの削除中にエラーが発生しました:', ['error' => $e->getMessage()]);
-        return redirect()->route('weight_logs')->with('error', '体重ログの削除に問題が発生しました。');
+        return redirect()->route('weight_logs');
     }
     }
 
@@ -88,6 +93,6 @@ class WeightController extends Controller
             ['target_weight' => $request->target_weight]
         );
 
-        return redirect()->route('weight_logs')->with('success', '目標体重が設定されました。');
+        return redirect()->route('weight_logs');
     }
 }

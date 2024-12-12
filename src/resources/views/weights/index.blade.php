@@ -66,7 +66,7 @@
 </div>
 
 <button class="button add-data-button" id="show-modal">データ追加</button>
-<div class="modal" id="data-modal">
+<div class="modal" id="data-modal" style="display: none;">
     <div class="modal-content">
         <form action="{{ route('weight_logs.store') }}" method="POST">
             @csrf
@@ -89,11 +89,22 @@
 
 @push('scripts')
 <script>
-    document.getElementById('show-modal').addEventListener('click', () => {
-        document.getElementById('data-modal').style.display = 'block';
-    });
-    document.querySelector('.close-modal').addEventListener('click', () => {
-        document.getElementById('data-modal').style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function () {
+        const showModalButton = document.getElementById('show-modal');
+        const modal = document.getElementById('data-modal');
+        const closeModalButton = document.querySelector('.close-modal');
+
+        if (showModalButton && modal && closeModalButton) {
+            showModalButton.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+        } else {
+            console.error('モーダルまたはボタンが見つかりません');
+        }
     });
 </script>
 @endpush

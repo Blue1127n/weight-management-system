@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\WeightManagementRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\AuthRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\WeightLog;
 use App\Models\WeightTarget;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthController extends Controller
     return view('auth.register-step1');
 }
 
-public function storeStep1(AuthRequest $request)
+public function storeStep1(RegisterRequest $request)
 {
     \Log::info('storeStep1 メソッドが呼び出されました');
     \Log::info('リクエストデータ:', $request->all());
@@ -44,7 +45,7 @@ public function storeStep1(AuthRequest $request)
         return view('auth.register-step2');
     }
 
-    public function storeStep2(WeightManagementRequest $request)
+    public function storeStep2(AuthRequest $request)
 {
     \Log::info('storeStep2 メソッドが呼び出されました');
     \Log::info('リクエストデータ:', $request->all());
@@ -79,33 +80,43 @@ public function showLogin()
     return view('auth.login');
 }
 
-public function login(AuthRequest $request)
+public function login(LoginRequest $request)
 {
+    // デバッグ用ログ
+    \Log::info('CSRFトークン:', ['token' => csrf_token()]);
+    \Log::info('セッションID:', ['session_id' => session()->getId()]);
     \Log::info('セッションデータ（ログイン前）:', session()->all());
-    \Log::info('現在の認証ユーザー:', ['user' => auth()->user()]);
+
+    Log::info('リクエストを受け取りました:', $request->all());
 
     $credentials = $request->only('email', 'password');
-    \Log::info('リクエストデータ:', $request->all());
-    \Log::info('認証クレデンシャル:', $credentials);
+    Log::info('認証クレデンシャル:', $credentials);
 
-    if (auth()->attempt($credentials)) {
-        \Log::info('認証成功');
-        \Log::info('ログインユーザーID:', ['user_id' => auth()->id()]);
-        \Log::info('セッションデータ（ログイン後）:', session()->all());
+    if (Auth::attempt($credentials)) {
+        Log::info('認証成功', ['email' => $credentials['email']]);
+        Log::info('ログインユーザー:', ['user' => Auth::user()->toArray()]);
+
+        // セッションデータを確認
+        Log::info('セッションID:', ['session_id' => session()->getId()]);
+        Log::info('セッションデータ:', session()->all());
+
         return redirect()->route('weight_logs');
+    } else {
+        Log::error('認証失敗', ['email' => $credentials['email']]);
+        return back()->withErrors([
+            'email' => 'メールアドレスまたはパスワードが正しくありません。',
+        ]);
     }
-
-    \Log::error('認証失敗', ['credentials' => $credentials]);
-    return back()->withErrors([
-        'email' => 'メールアドレスまたはパスワードが正しくありません。',
-    ]);
 }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        \Log::info('ログアウト処理開始', ['user_id' => auth()->id()]);
-        auth()->logout();
-        \Log::info('ログアウト処理完了');
+        // ログアウト処理
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        Log::info('ログアウトしました');
         return redirect()->route('login');
     }
 }

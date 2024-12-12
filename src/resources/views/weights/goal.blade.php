@@ -4,6 +4,7 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/goal.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -12,7 +13,7 @@
         @csrf
 
         <div class="form-group">
-            <label for="target_weight">目標体重</label>
+            <label for="target_weight">目標体重設定</label>
             <input type="number" name="target_weight" step="0.1" value="{{ $weightTarget }}" required>
             <span class="unit">kg</span>
             @error('target_weight')
@@ -21,8 +22,8 @@
         </div>
 
         <div class="buttons">
+            <button type="button" id="close-modal" class="button">戻る</button>
             <button type="submit" class="button update-button">更新</button>
-            <a href="{{ route('weight_logs') }}" class="button back-button">戻る</a>
         </div>
     </form>
 </div>

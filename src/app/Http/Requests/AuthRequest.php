@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class AuthRequest extends FormRequest
 {
@@ -24,19 +25,36 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'required|string',
-        ];
+            'current_weight' => [
+                'required',
+                'numeric',
+                'valid_integer_part',
+                'valid_decimal_part',
+            ],
+            'target_weight' => [
+                'required',
+                'numeric',
+                'valid_integer_part',
+                'valid_decimal_part',
+            ],
+            ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'お名前を入力してください',
-            'email.required' => 'メールアドレスを入力してください',
-            'email.email' => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
-            'password.required' => 'パスワードを入力してください',
-        ];
+            'current_weight.required' => '現在の体重を入力してください',
+            'current_weight.valid_integer_part' => '4桁までの数字で入力してください',
+            'current_weight.valid_decimal_part' => '小数点は1桁で入力してください',
+            'target_weight.required' => '目標の体重を入力してください',
+            'target_weight.valid_integer_part' => '4桁までの数字で入力してください',
+            'target_weight.valid_decimal_part' => '小数点は1桁で入力してください',
+            ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        \Log::error('バリデーションエラー詳細:', $validator->errors()->toArray());
+        parent::failedValidation($validator);
     }
 }

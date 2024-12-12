@@ -1,64 +1,115 @@
 .form-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 307px 521px;
     text-align: center;
+    background-color: rgba(249, 249, 249, 1);
 }
 
 .form-group {
     margin-bottom: 20px;
+    width: 470px;
+    height: 298px;
+    padding: 30px 20px;
+    gap: 50px;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 label {
     display: block;
-    font-weight: bold;
     margin-bottom: 10px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 45px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
 }
 
 input[type="number"] {
-    width: 80%;
-    padding: 10px;
+    width: 400px;
+    height: 43px;
+    gap: 10px;
+    padding: 11px 10px;
     margin: 0 auto;
     display: block;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    background-color: rgba(255, 255, 255, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
 }
 
 .unit {
     display: inline-block;
     margin-left: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
 }
 
 .buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .button {
     flex: 1;
     margin: 0 10px;
     padding: 10px;
-    background: #af8bd0;
-    color: #fff;
     text-align: center;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+    height: 50px;
+    width: 200px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-weight: 600;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    border-radius: 12px;
 }
 
-.button:hover {
-    background: #9a7bbd;
+.close-modal {
+    padding: 13px 10px;
+    gap: 10px;
+    background-color: rgba(224, 223, 222, 1);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(51, 51, 51, 1);
+}
+
+.update-button {
+    padding: 10px;
+    gap: 10px;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+    font-size: 20px;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 1);
+    ;
 }
 
 .error {
-    color: red;
-    font-size: 0.9em;
+    color: rgba(246, 90, 90, 1);
     margin-top: 5px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }

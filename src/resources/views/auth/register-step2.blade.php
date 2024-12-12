@@ -20,7 +20,9 @@
             <input type="text" id="current_weight" name="current_weight" value="{{ old('current_weight') }}" placeholder="現在の体重を入力">
             <span class="unit">kg</span>
             @error('current_weight')
-                <p class="error-message">{{ $message }}</p>
+            <div class="error">
+                <span>{{ $message }}</span>
+            </div>
             @enderror
         </div>
 
@@ -29,7 +31,9 @@
             <input type="text" id="target_weight" name="target_weight" value="{{ old('target_weight') }}" placeholder="目標の体重を入力">
             <span class="unit">kg</span>
             @error('target_weight')
-                <p class="error-message">{{ $message }}</p>
+            <div class="error">
+                <span>{{ $message }}</span>
+            </div>
             @enderror
         </div>
 
@@ -37,22 +41,3 @@
     </form>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const formContainer = document.querySelector('.form-container');
-        const errorMessages = document.querySelectorAll('.form-container .error-message');
-
-        // 初期高さを設定
-        if (formContainer) {
-            formContainer.style.height = '560px';
-        }
-
-        // エラーメッセージがある場合に高さを拡張
-        if (errorMessages.length > 0 && formContainer) {
-            formContainer.style.height = '746px';
-        }
-    });
-</script>
-@endpush
