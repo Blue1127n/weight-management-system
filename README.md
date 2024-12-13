@@ -29,7 +29,7 @@
       `php artisan migrate`  
       
 ## 使用画像保存先  
-
+![画像保存先](src/images)  
   
 ## 使用技術(実行環境)  
 - PHP8.3.11  
