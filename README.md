@@ -27,17 +27,14 @@
       `php artisan key:generate`  
     6.マイグレーションの実行  
       `php artisan migrate`  
-      
-## 使用画像保存先    
-![画像保存先](public/images)   
-  
+
 ## 使用技術(実行環境)  
 - PHP8.3.11  
 - Laravel8.83.8  
 - MySQL8.0.26  
   
 ## ER図  
-![ER図](src/public/images/weight.svg)  
+
 
 ## URL  
 - 開発環境：http://localhost/  
