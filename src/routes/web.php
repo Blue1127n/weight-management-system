@@ -31,9 +31,9 @@ Route::middleware(['auth'])->group(function () {
     // 体重管理関連
     Route::get('/weight_logs', [WeightController::class, 'index'])->name('weight_logs');
     Route::post('/weight_logs/create', [WeightController::class, 'store'])->name('weight_logs.store');
-    Route::get('/weight_logs/{weightLogId}/edit', [WeightController::class, 'show'])->name('weight_logs.edit');
+    Route::get('/weight_logs/{weightLogId}/edit', [WeightController::class, 'edit'])->name('weight_logs.edit');
     Route::put('/weight_logs/{weightLogId}/update', [WeightController::class, 'update'])->name('weight_logs.update');
-    Route::delete('/weight_logs/{weightLogId}/delete', [WeightController::class, 'delete'])->name('weight_logs.delete');
+    Route::delete('/weight_logs/{weightLogId}/delete', [WeightController::class, 'delete'])->name('weight_logs.destroy');
     Route::get('/weight_logs/goal_setting', [WeightController::class, 'showGoalSetting'])->name('weight_logs.goal_setting');
     Route::post('/weight_logs/goal_setting', [WeightController::class, 'setGoal'])->name('weight_logs.set_goal');
 });

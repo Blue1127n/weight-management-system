@@ -47,10 +47,10 @@ class WeightController extends Controller
     }
 
     // 情報更新画面の表示
-    public function show($weightLogId)
+    public function edit($id)
     {
-        $log = WeightLog::findOrFail($weightLogId);
-        return view('weights.edit', compact('log'));
+        $weightLog = WeightLog::findOrFail($id);
+        return view('weights.edit', compact('weightLog'));
     }
 
     // 体重ログの更新

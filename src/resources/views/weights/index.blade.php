@@ -8,29 +8,43 @@
 @endpush
 
 @section('content')
-<div class="stats">
-    <div class="stat">
+<div class="container">
+<div class="stats-container">
+    <div class="stat-box">
         <div class="stat-label">目標体重</div>
-        <div class="stat-value">{{ $weightTarget ?? '-' }} kg</div>
+        <div class="stat-value">{{ $weightTarget ?? '-' }} <span class="unit">kg</span></div>
     </div>
-    <div class="stat">
+    <div class="stat-divider"></div>
+    <div class="stat-box">
         <div class="stat-label">目標まで</div>
-        <div class="stat-value">{{ $currentWeight && $weightTarget ? $currentWeight - $weightTarget : '-' }} kg</div>
+        <div class="stat-value">{{ $currentWeight && $weightTarget ? $currentWeight - $weightTarget : '-' }} <span class="unit">kg</span></div>
     </div>
-    <div class="stat">
+    <div class="stat-divider"></div>
+    <div class="stat-box">
         <div class="stat-label">最新体重</div>
-        <div class="stat-value">{{ $currentWeight ?? '-' }} kg</div>
+        <div class="stat-value">{{ $currentWeight ?? '-' }} <span class="unit">kg</span></div>
     </div>
 </div>
 
 <div class="search-container">
     <form action="{{ route('weight_logs') }}" method="GET">
-        <input type="date" name="start_date" value="{{ request('start_date') }}">
+    <div class="search-fields">
+        <div class="input-container">
+            <input type="date" name="start_date" value="{{ request('start_date') }}" placeholder="年/月/日">
+            <img src="{{ asset('images/Polygon 2.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+        </div>
         <span>〜</span>
-        <input type="date" name="end_date" value="{{ request('end_date') }}">
+        <div class="input-container">
+            <input type="date" name="end_date" value="{{ request('end_date') }}" placeholder="年/月/日">
+            <img src="{{ asset('images/Polygon 2.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+        </div>
         <button type="submit" class="button search-button">検索</button>
+        @if(request('start_date') || request('end_date'))
         <a href="{{ route('weight_logs') }}" class="button reset-button">リセット</a>
+        @endif
+    </div>
     </form>
+    <button class="button add-data-button" id="show-modal">データ追加</button>
 </div>
 
 <div class="results">
@@ -38,11 +52,11 @@
         <table class="results-table">
             <thead>
                 <tr>
-                    <th>日付</th>
-                    <th>体重</th>
-                    <th>摂取カロリー</th>
-                    <th>運動時間</th>
-                    <th>編集</th>
+                    <th class="column-date">日付</th>
+                    <th class="column-weight">体重</th>
+                    <th class="column-calories">摂取カロリー</th>
+                    <th class="column-exercise">運動時間</th>
+                    <th class="column-edit"></th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +67,7 @@
                     <td>{{ $log->calories }} cal</td>
                     <td>{{ $log->exercise_time }}</td>
                     <td>
-                        <a href="{{ route('weight_logs.update', $log->id) }}" class="edit-icon">✎</a>
+                        <a href="{{ route('weight_logs.edit', $log->id) }}" class="edit-icon"><img src="{{ asset('images/pen.svg') }}" alt="編集" /></a>
                     </td>
                 </tr>
                 @endforeach
@@ -64,24 +78,53 @@
         <p>検索結果がありません。</p>
     @endif
 </div>
+</div>
 
-<button class="button add-data-button" id="show-modal">データ追加</button>
-<div class="modal" id="data-modal" style="display: none;">
+<div class="index-modal hidden" id="index-modal">
     <div class="modal-content">
+        <h2 class="modal-title">Weight Logを追加</h2>
         <form action="{{ route('weight_logs.store') }}" method="POST">
-            @csrf
-            <label for="date">日付</label>
-            <input type="date" name="date" value="{{ now()->format('Y-m-d') }}" required>
-            <label for="weight">体重</label>
-            <input type="number" name="weight" step="0.1" required>
-            <label for="calories">摂取カロリー</label>
-            <input type="number" name="calories" required>
-            <label for="exercise_time">運動時間</label>
-            <input type="time" name="exercise_time" required>
-            <label for="exercise_content">運動内容</label>
-            <textarea name="exercise_content"></textarea>
-            <button type="submit" class="button">登録</button>
-            <button type="button" class="button close-modal">戻る</button>
+        @csrf
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="date">日付</label><span class="required-label">必須</span>
+                    <input type="date" name="date" value="{{ now()->format('Y-m-d') }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="weight">体重</label><span class="required-label">必須</span>
+                    <input type="number" name="weight" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="calories">摂取カロリー</label><span class="required-label">必須</span>
+                    <input type="number" name="calories" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="exercise_time">運動時間</label><span class="required-label">必須</span>
+                    <input type="time" name="exercise_time" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="exercise_content">運動内容</label>
+                    <textarea name="exercise_content"></textarea>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="button" id="close-modal" class="button close-button">戻る</button>
+                <button type="submit" class="button save-button">登録</button>
+            </div>
         </form>
     </div>
 </div>
@@ -90,21 +133,23 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const showModalButton = document.getElementById('show-modal');
-        const modal = document.getElementById('data-modal');
-        const closeModalButton = document.querySelector('.close-modal');
+    const showModalButton = document.getElementById('show-modal');
+    const modal = document.getElementById('index-modal');
+    const closeModalButton = document.getElementById('close-modal');
 
-        if (showModalButton && modal && closeModalButton) {
-            showModalButton.addEventListener('click', () => {
-                modal.style.display = 'block';
-            });
+    if (showModalButton && modal && closeModalButton) {
+        // 「データ追加」ボタンのクリックイベント
+        showModalButton.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
 
-            closeModalButton.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-        } else {
-            console.error('モーダルまたはボタンが見つかりません');
-        }
-    });
+        // モーダルを閉じるボタンのクリックイベント
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    } else {
+        console.error('モーダルまたはボタンが見つかりません');
+    }
+});
 </script>
 @endpush
