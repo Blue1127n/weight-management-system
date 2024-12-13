@@ -37,7 +37,7 @@
 - MySQL8.0.26  
   
 ## ER図  
-![ER図](public/images/weight.svg)  
+![ER図](src/public/images/weight.svg)  
 
 ## URL  
 - 開発環境：http://localhost/  
