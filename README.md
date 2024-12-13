@@ -29,7 +29,7 @@
       `php artisan migrate`  
       
 ## 使用画像保存先    
-![画像保存先](src/images)   
+![画像保存先](public/images)   
   
 ## 使用技術(実行環境)  
 - PHP8.3.11  
@@ -37,8 +37,8 @@
 - MySQL8.0.26  
   
 ## ER図  
-![ER図](src/images/weight.svg)  
- 
+![ER図](public/images/weight.svg)  
+
 ## URL  
 - 開発環境：http://localhost/  
 - phpMyAdmin:：http://localhost:8080/  
