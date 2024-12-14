@@ -15,7 +15,15 @@ class WeightController extends Controller
         \Log::info('体重管理画面が表示されました');
 
         $user = auth()->user();
+        if (!$user) {
+            \Log::error('認証ユーザーが取得できませんでした。');
+            return redirect()->route('login')->withErrors('ログインしてください。');
+        }
+
+        // ログインユーザーの体重ログを取得
         $logs = $user->weightLogs()->orderBy('date', 'desc')->paginate(8);
+
+        // 最新体重と目標体重を取得
         $currentWeight = $user->weightLogs()->latest('date')->value('weight');
         $weightTarget = $user->weightTarget()->value('target_weight');
 
