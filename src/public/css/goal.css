@@ -3,20 +3,21 @@
     min-height: 100vh;
     padding: 307px 521px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(249, 249, 249, 1);
 }
 
 .form-group {
-    margin-bottom: 20px;
     width: 470px;
     height: 298px;
     padding: 30px 20px;
     gap: 50px;
     background-color: rgba(255, 255, 255, 1);
-    text-align: center;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 label {
@@ -31,6 +32,14 @@ label {
     color: rgba(51, 51, 51, 1);
 }
 
+.input-group {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
 input[type="number"] {
     width: 400px;
     height: 43px;
@@ -43,14 +52,14 @@ input[type="number"] {
     font-size: 14px;
     font-weight: 300;
     line-height: 21px;
-    text-align: left;
+    text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(51, 51, 51, 1);
+    margin-right: 5px;
 }
 
 .unit {
-    display: inline-block;
     margin-left: 10px;
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 16px;
@@ -64,13 +73,14 @@ input[type="number"] {
 
 .buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 20px;
     gap: 20px;
+    max-width: 400px;
 }
 
 .button {
-    flex: none;
+    flex: 1;
     margin: 0 10px;
     padding: 10px;
     text-align: center;
@@ -81,7 +91,6 @@ input[type="number"] {
     width: 200px;
     font-family: Hiragino Kaku Gothic Pro;
     font-weight: 600;
-    text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     border-radius: 12px;
@@ -114,7 +123,6 @@ input[type="number"] {
     font-size: 14px;
     font-weight: 300;
     line-height: 21px;
-    text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }

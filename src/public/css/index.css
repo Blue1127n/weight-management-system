@@ -165,7 +165,7 @@
     right: 10px;
     width: 12px; /* アイコンの幅 */
     height: 12px; /* アイコンの高さ */
-    background-image: url('images/Polygon 2.svg'); /* 上下逆三角の画像を指定 */
+    background-image: url('images/Polygon.svg'); /* 上下逆三角の画像を指定 */
     background-size: contain;
     background-repeat: no-repeat;
     transform: translateY(-50%);
@@ -426,8 +426,8 @@
 .index-modal {
     top: 0;
     left: 0;
-    width: 100vw;
     height: 100vh;
+    width: 100%;
     background-color: rgba(51, 51, 51, 0.5);
     display: flex;
     justify-content: center;
@@ -452,12 +452,16 @@
 
 .index-modal .form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .index-modal.label-container {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
 .index-modal .modal-title{
@@ -484,7 +488,21 @@
     text-decoration-skip-ink: none;
     color: rgba(51, 51, 51, 1);
 }
-.index-modal .required-label {
+
+.index-modal .label-with-required {
+    display: flex;
+    align-items: center; /* ラベルと必須を縦方向で中央揃え */
+    font-family: Hiragino Kaku Gothic Pro, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+}
+
+.index-modal .label-with-required .required-label {
     display: inline-block;
     width: 34px;
     height: 18px;
@@ -499,14 +517,43 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(255, 255, 255, 1);
+    margin-left: 10px;
 }
 
-.index-modal input, .index-modal textarea {
-    width: 100%;
-    padding: 8px;
+.index-modal input {
+    width: 760px;
+    height: 43px;
+    padding: 11px 10px;
+    gap: 0px;
+    border-radius: 5px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+}
+
+.index-modal textarea {
+    width: 760px;
+    height:160px;
+    padding: 11px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    opacity: 0px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1);
+}
+
+.index-modal .button-container {
+    display: flex; /* フレックスボックスで配置 */
+    justify-content: center; /* ボタンを中央に揃える */
+    gap: 20px; /* ボタン間の余白 */
+    margin-top: 20px; /* 上に少し余白を追加 */
 }
 
 .index-modal .close-button {
@@ -528,19 +575,53 @@
 }
 
 .modal-content .close-button, .modal-content .save-button {
-    padding: 10px 20px;
-    border-radius: 5px;
+    width: 200px;
+    height: 50px;
     border: none;
     cursor: pointer;
+    font-family: Hiragino Kaku Gothic Pro;
+
+    font-weight: 600;
+
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
 .modal-content .save-button {
-    background-color: #ffabd9;
     color: #fff;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+    color: rgba(255, 255, 255, 1);
 }
 
 .modal-content .close-button {
     background-color: #ccc;
+    padding: 13px 10px;
+    border-radius: 12px;
+    line-height: 24px;
+    background: rgba(224, 223, 222, 1);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+    color: rgba(51, 51, 51, 1);
+    font-size: 16px;
+}
+
+.modal-content .error-message {
+    margin-top: 5px;
+    font-size: 12px;
+    color: rgba(246, 90, 90, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    position: absolute;
+    left: 0;
+    bottom: -18px; /* フォームフィールド下に配置 */
 }
 
 /* レスポンシブ対応 */

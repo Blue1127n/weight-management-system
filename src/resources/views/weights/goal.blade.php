@@ -14,15 +14,17 @@
 
         <div class="form-group">
             <label for="target_weight">目標体重設定</label>
+            <div class="input-group">
             <input type="number" name="target_weight" step="0.1" value="{{ $weightTarget }}" placeholder="46.5">
             <span class="unit">kg</span>
+            </div>
             @error('target_weight')
             <span class="error">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="buttons">
-            <button type="button" class="button button-close">戻る</button>
+            <button type="button" class="button button-close" onclick="history.back()">戻る</button>
             <button type="submit" class="button update-button">更新</button>
         </div>
     </form>

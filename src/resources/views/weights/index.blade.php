@@ -32,12 +32,12 @@
             <div class="search-fields">
                 <div class="input-container">
                     <input type="date" name="start_date" value="{{ request('start_date') }}" placeholder="年/月/日">
-                    <img src="{{ asset('images/Polygon 2.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+                    <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
                 </div>
                 <span class="date-separator">〜</span>
                 <div class="input-container">
                     <input type="date" name="end_date" value="{{ request('end_date') }}" placeholder="年/月/日">
-                    <img src="{{ asset('images/Polygon 2.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+                    <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
                 </div>
                 <button type="submit" class="button search-button">検索</button>
                 @if(request('start_date') || request('end_date'))
@@ -95,57 +95,50 @@
         <form action="{{ route('weight_logs.store') }}" method="POST">
         @csrf
 
-            <div class="form-group">
-                <div class="label-container">
-                    <label for="date">日付</label><span class="required-label">必須</span>
-                    <input type="date" name="date" value="{{ now()->format('Y-m-d') }}" required>
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="date" class="label-with-required">日付<span class="required-label">必須</span></label>
+                <input type="date" name="date" value="{{ now()->format('Y-m-d') }}" required>
+                @error('date')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
+        </div>
 
-            <div class="form-group">
-                <div class="label-container">
-                    <label for="weight">体重</label><span class="required-label">必須</span>
-                    <input type="number" name="weight" step="0.1" required>
-                    @error('weight')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="weight" class="label-with-required">体重<span class="required-label">必須</span></label>
+                <input type="number" name="weight" step="0.1" value="{{ old('weight') }}" required>
+                @error('weight')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
+        </div>
 
-            <div class="form-group">
-                <div class="label-container">
-                    <label for="calories">摂取カロリー</label><span class="required-label">必須</span>
-                    <input type="number" name="calories" required>
-                    @error('calories')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="calories" class="label-with-required">摂取カロリー<span class="required-label">必須</span></label>
+                <input type="number" name="calories" value="{{ old('calories') }}" required>
+                @error('calories')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
+        </div>
 
-            <div class="form-group">
-                <div class="label-container">
-                    <label for="exercise_time">運動時間</label><span class="required-label">必須</span>
-                    <input type="time" name="exercise_time" required>
-                    @error('exercise_time')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="exercise_time" class="label-with-required">運動時間<span class="required-label">必須</span></label>
+                <input type="time" id="exercise_time" name="exercise_time" value="{{ old('exercise_time') }}" required>
+                @error('exercise_time')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
+        </div>
 
-            <div class="form-group">
-                <div class="label-container">
-                    <label for="exercise_content">運動内容</label>
-                    <textarea name="exercise_content"></textarea>
-                    @error('exercise_content')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="exercise_content" class="label-with-required">運動内容</label>
+                <textarea name="exercise_content">{{ old('exercise_content') }}</textarea>
+                @error('exercise_content')
+                    <p class="error-message">{{ $message }}</p>
+                @enderror
+        </div>
 
-            <div class="button-container">
-                <button type="button" id="close-modal" class="button close-button">戻る</button>
-                <button type="submit" class="button save-button">登録</button>
-            </div>
+        <div class="button-container">
+            <button type="button" id="close-modal" class="button close-button">戻る</button>
+            <button type="submit" class="button save-button">登録</button>
+        </div>
         </form>
     </div>
 </div>
