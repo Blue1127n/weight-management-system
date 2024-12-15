@@ -164,7 +164,7 @@
         // 「データ追加」ボタンのクリックイベント
         showModalButton.addEventListener('click', () => {
             modal.classList.remove('hidden');
-            
+
             const errorMessages = document.querySelectorAll('.error-message');
             errorMessages.forEach(error => error.textContent = ''); // メッセージをクリア
 
