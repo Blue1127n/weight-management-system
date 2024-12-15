@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\WeightLog;
 use App\Models\WeightTarget;
 use Illuminate\Http\Request;
 use App\Http\Requests\WeightManagementRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class WeightController extends Controller
 {
@@ -13,6 +16,9 @@ class WeightController extends Controller
     public function index(Request $request)
     {
         \Log::info('体重管理画面が表示されました');
+
+        // セッションエラーをクリア
+        session()->forget('errors');
 
         $user = auth()->user();
         if (!$user) {
@@ -35,12 +41,20 @@ class WeightController extends Controller
     return view('weights.create'); // 新規登録用のviewファイル
 }
 
+
     // 体重ログの登録
     public function store(WeightManagementRequest $request)
     {
-        auth()->user()->weightLogs()->create($request->validated());
-
-        return redirect()->route('weight_logs');
+        \Log::info('WeightManagementRequestのバリデーションが実行されました。');
+        \Log::info($request->all());
+        
+        try {
+            auth()->user()->weightLogs()->create($request->validated());
+            return redirect()->route('weight_logs')->with('success', '体重ログを登録しました。');
+        } catch (\Exception $e) {
+            \Log::error('エラーが発生しました: ', ['error' => $e->getMessage()]);
+            return back()->withErrors(['error' => '登録中にエラーが発生しました。'])->withInput();
+    }
     }
 
     // 検索機能

@@ -124,12 +124,13 @@
     width: 200px;
     height: 43px;
     margin: 0 10px;
-    padding: 11px 10px;
+    padding: 11px 30px 11px 10px;
     gap: 0px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 1);
     border: 1px solid rgba(224, 223, 222, 1);
-    appearance: none;
+    appearance: auto;
+    -webkit-appearance: auto; /* Safari対応 */
 }
 
 .input-container input[type="date"]::placeholder {
@@ -155,7 +156,10 @@
 }
 
 .input-container input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
+    opacity: 0; /* デフォルトアイコンは非表示にする */
+    position: absolute;
+    right: 10px;
+    pointer-events: auto; /* カレンダークリックを有効にする */
 }
 
 .input-container::after {
@@ -165,9 +169,8 @@
     right: 10px;
     width: 12px; /* アイコンの幅 */
     height: 12px; /* アイコンの高さ */
-    background-image: url('images/Polygon.svg'); /* 上下逆三角の画像を指定 */
-    background-size: contain;
-    background-repeat: no-repeat;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
     transform: translateY(-50%);
     pointer-events: none;
     color: rgba(205, 205, 205, 1);
@@ -444,7 +447,9 @@
 
 .index-modal .modal-content {
     width: 800px;
-    height: 828px;
+    min-height: 828px;
+    max-height: 1076px;
+    transition: height 0.3s ease;
     background-color: rgba(255, 255, 255, 1);
     padding: 30px 20px;
     gap: 30px;
@@ -538,6 +543,110 @@
     color: rgba(51, 51, 51, 1);
 }
 
+/* 日付入力フィールドのカレンダーアイコンを非表示 */
+.index-modal input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none; /* デフォルトアイコンを非表示 */
+}
+
+.index-modal .date-input-container {
+    position: relative; /* 親要素を基準にアイコンを配置 */
+    display: inline-block; /* input と一緒にアイコンを配置 */
+    width: fit-content;
+}
+
+.index-modal .date-input-container input[type="date"] {
+    appearance: none; /* ブラウザデフォルトのアイコンを無効化 */
+    -webkit-appearance: auto; /* Safari用 */
+    padding: 11px 30px 11px 10px;
+    width: 760px;
+    height: 43px;
+    gap: 0px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1);
+}
+
+.index-modal .date-input-container::after {
+    content: "";
+    position: absolute;
+    top: 50%; /* input の中央にアイコンを配置 */
+    right: 10px; /* input の右端からの距離 */
+    transform: translateY(-50%);
+    width: 12px; /* アイコンの幅 */
+    height: 12px; /* アイコンの高さ */
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(205, 205, 205, 1); /* 三角形の色を指定 */
+    pointer-events: none; /* アイコンがクリックされないようにする */
+}
+
+.date-input-container input[type="date"]::-webkit-calendar-picker-indicator {
+    display: block;
+    position: absolute;
+    right: 10px;
+    opacity: 0; /* アイコンを見えなくするがクリックは有効 */
+    pointer-events: auto; /* カレンダーアイコンのクリックを有効にする */
+}
+
+.index-modal input[class="common-field"] {
+    width: 730px;
+    height: 43px;
+    padding: 11px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.index-modal .input-with-unit {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px; /* 入力フィールドと単位の間の余白 */
+}
+
+.index-modal .input-with-unit input {
+    flex: 1;
+}
+
+.index-modal .input-with-unit .unit {
+    white-space: nowrap;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+    margin-left: 5px; /* 入力フィールドと単位の間の余白 */
+}
+
+input::placeholder {
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(205, 205, 205, 1);
+}
+
+/* 時計マークを非表示 */
+.index-modal input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+/* プレースホルダーのスタイル調整 */
+.index-modal input[type="text"]::placeholder {
+    color: rgba(205, 205, 205, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
 .index-modal textarea {
     width: 760px;
     height:160px;
@@ -547,6 +656,19 @@
     opacity: 0px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(224, 223, 222, 1);
+    color: rgba(51, 51, 51, 1);
+
+}
+
+textarea::placeholder {
+    color: rgba(205, 205, 205, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
 .index-modal .button-container {
@@ -610,7 +732,8 @@
 }
 
 .modal-content .error-message {
-    margin-top: 5px;
+    margin-top: 2px;
+    margin-bottom: 20px;
     font-size: 12px;
     color: rgba(246, 90, 90, 1);
     font-family: Hiragino Kaku Gothic Pro;
@@ -619,9 +742,7 @@
     line-height: 21px;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    position: absolute;
     left: 0;
-    bottom: -18px; /* フォームフィールド下に配置 */
 }
 
 /* レスポンシブ対応 */

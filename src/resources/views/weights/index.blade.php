@@ -97,7 +97,8 @@
 
         <div class="form-group">
             <label for="date" class="label-with-required">日付<span class="required-label">必須</span></label>
-                <input type="date" name="date" value="{{ now()->format('Y-m-d') }}" required>
+            <div class="date-input-container">
+            <input type="date" id="date-field" name="date" value="{{ old('date', now()->format('Y-m-d')) }}" placeholder="年/月/日" required>
                 @error('date')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -105,7 +106,10 @@
 
         <div class="form-group">
             <label for="weight" class="label-with-required">体重<span class="required-label">必須</span></label>
-                <input type="number" name="weight" step="0.1" value="{{ old('weight') }}" required>
+                <div class="input-with-unit">
+                    <input type="text" id="weight-field" class="common-field" name="weight" step="0.1" value="{{ old('weight') }}" placeholder="50.0">
+                    <span class="unit">kg</span>
+                </div>
                 @error('weight')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -113,7 +117,10 @@
 
         <div class="form-group">
             <label for="calories" class="label-with-required">摂取カロリー<span class="required-label">必須</span></label>
-                <input type="number" name="calories" value="{{ old('calories') }}" required>
+                <div class="input-with-unit">
+                    <input type="text" class="common-field" name="calories" value="{{ old('calories') }}" placeholder="1200">
+                    <span class="unit">cal</span>
+                </div>
                 @error('calories')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -121,7 +128,8 @@
 
         <div class="form-group">
             <label for="exercise_time" class="label-with-required">運動時間<span class="required-label">必須</span></label>
-                <input type="time" id="exercise_time" name="exercise_time" value="{{ old('exercise_time') }}" required>
+                <input type="text" id="exercise_time" name="exercise_time" value="{{ old('exercise_time') }}" placeholder="00：00" onfocus="(this.type='time')" 
+                onblur="if(this.value===''){this.type='text'; this.placeholder='00:00';}">
                 @error('exercise_time')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -129,7 +137,7 @@
 
         <div class="form-group">
             <label for="exercise_content" class="label-with-required">運動内容</label>
-                <textarea name="exercise_content">{{ old('exercise_content') }}</textarea>
+                <textarea name="exercise_content" placeholder="運動内容を追加">{{ old('exercise_content') }}</textarea>
                 @error('exercise_content')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -151,18 +159,51 @@
     const modal = document.getElementById('index-modal');
     const closeModalButton = document.getElementById('close-modal');
 
+    // 「データ追加」ボタンでモーダルを表示
     if (showModalButton && modal && closeModalButton) {
         // 「データ追加」ボタンのクリックイベント
         showModalButton.addEventListener('click', () => {
             modal.classList.remove('hidden');
+            
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(error => error.textContent = ''); // メッセージをクリア
+
+        // モーダル内の日付フィールドにデフォルト値（今日の日付）を設定
+        const dateField = modal.querySelector('input[name="date"]');
+            if (dateField && !dateField.value) {
+                const today = new Date().toISOString().split('T')[0]; // 今日の日付
+                dateField.value = today;
+            }
         });
 
         // モーダルを閉じるボタンのクリックイベント
         closeModalButton.addEventListener('click', () => {
             modal.classList.add('hidden');
+
+            // フォームのリセット処理を追加
+            const form = modal.querySelector('form');
+                if (form) {
+                    form.reset(); // フォーム全体をリセット
+
+            // 必要に応じてデフォルト値を再設定
+            const dateField = form.querySelector('input[name="date"]');
+                if (dateField) {
+                    dateField.value = ""; // デフォルト値を空にリセット
+                }
+            }
         });
-    } else {
-        console.error('モーダルまたはボタンが見つかりません');
+    }
+
+    // エラーメッセージがある場合にモーダルを自動表示
+    if (document.querySelector('.error-message')) {
+        modal.classList.remove('hidden');
+    }
+
+    // 日付が空の場合に当日の日付を設定
+    const dateField = document.getElementById('date-field');
+    if (dateField && !dateField.value) {
+        const today = new Date().toISOString().split('T')[0]; // 今日の日付を取得
+        dateField.value = today;
     }
 });
 </script>

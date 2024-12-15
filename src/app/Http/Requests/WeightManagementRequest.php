@@ -25,8 +25,18 @@ class WeightManagementRequest extends FormRequest
      */
     public function rules()
     {
+        \Log::info('WeightManagementRequestのバリデーションが実行されました。');
         return [
-            'date' => 'required|date',
+            'date' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    \Log::info("送信された日付: {$value}");
+                    if ($value === now()->format('Y-m-d')) {
+                        $fail('日付を入力してください');
+                    }
+                },
+            ],
             'weight' => [
             'required',
             'numeric',
@@ -36,12 +46,6 @@ class WeightManagementRequest extends FormRequest
             'calories' => 'required|integer|min:0|max:9999',
             'exercise_time' => 'required|date_format:H:i',
             'exercise_content' => 'nullable|string|max:120',
-            'target_weight' => [
-            'required',
-            'numeric',
-            'valid_integer_part',
-            'valid_decimal_part',
-            ],
             ];
     }
 
@@ -57,9 +61,6 @@ class WeightManagementRequest extends FormRequest
             'calories.integer' => '数字で入力してください',
             'exercise_time.required' => '運動時間を入力してください',
             'exercise_content.max' => '120文字以内で入力してください',
-            'target_weight.required' => '目標の体重を入力してください',
-            'target_weight.valid_integer_part' => '4桁までの数字で入力してください',
-            'target_weight.valid_decimal_part' => '小数点は1桁で入力してください',
             ];
     }
 
