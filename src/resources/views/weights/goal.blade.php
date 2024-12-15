@@ -9,24 +9,27 @@
 
 @section('content')
 <div class="form-container">
-    <form action="{{ route('weight_logs.set_goal') }}" method="POST">
-    @csrf
+    <div class="form-wrapper">
+        <form action="{{ route('weight_logs.set_goal') }}" method="POST">
+        @csrf
 
-        <div class="form-group">
-            <label for="target_weight">目標体重設定</label>
-            <div class="input-group">
-            <input type="number" name="target_weight" step="0.1" value="{{ $weightTarget }}" placeholder="46.5">
-            <span class="unit">kg</span>
-            </div>
+        <h2 class="form-title">目標体重設定</h2>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="number" name="target_weight" step="0.1" value="{{ $weightTarget }}" placeholder="46.5">
+                    <span class="unit">kg</span>
+                </div>
             @error('target_weight')
-            <span class="error">{{ $message }}</span>
+                <span class="error">{{ $message }}</span>
             @enderror
-        </div>
+            </div>
 
-        <div class="buttons">
-            <button type="button" class="button button-close" onclick="history.back()">戻る</button>
-            <button type="submit" class="button update-button">更新</button>
-        </div>
-    </form>
+            <div class="buttons">
+                <button type="button" class="button button-close" onclick="history.back()">戻る</button>
+                <button type="submit" class="button update-button">更新</button>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

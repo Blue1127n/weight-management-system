@@ -5,18 +5,10 @@
     display: flex;
     justify-content: center; /* 水平方向中央揃え */
     align-items: center; /* 垂直方向中央揃え */
-    flex-direction: column; /* 要素を縦並び */
     background-color: rgba(249, 249, 249, 1);
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%; /* 親要素の高さも調整 */
-}
-
-.form-group {
+.form-wrapper {
     width: 470px;
     min-height: 298px;
     padding: 30px 20px;
@@ -26,10 +18,10 @@ form {
     flex-direction: column; /* 要素を縦並び */
     justify-content: flex-start;
     align-items: center; /* 水平方向中央揃え */
-    margin-bottom: 10px;
+    justify-content: space-between;
 }
 
-label {
+.form-title {
     margin-bottom: 10px;
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 30px;
@@ -41,13 +33,20 @@ label {
     text-align: center;
 }
 
+/* 入力フィールドのラッパー */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
 .input-group {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    width: 100%;
-    margin-bottom: 10px;
 }
 
 input[type="number"] {
@@ -62,7 +61,7 @@ input[type="number"] {
     font-size: 14px;
     font-weight: 300;
     line-height: 21px;
-    text-align: center;
+    text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(51, 51, 51, 1);
@@ -86,7 +85,7 @@ input[type="number"] {
     justify-content: center; /* ボタンを中央揃え */
     margin-top: 0px;
     gap: 20px;
-    max-width: 400px;
+    width: 100%;
 }
 
 .button {
