@@ -32,6 +32,36 @@
     margin-bottom: 15px;
 }
 
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    width: 100%;
+    height: 43px;
+    padding: 11px 10px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.triangle-icon {
+    position: absolute;
+    right: 10px; /* 右端に配置 */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+    pointer-events: none; /* クリックを無効化 */
+}
+
+/* Flatpickrのカスタムスタイル */
+.flatpickr-calendar {
+    z-index: 100; /* カレンダーが最前面に表示されるように */
+}
+
 label {
     display: block;
     margin-bottom: 5px;
@@ -47,35 +77,94 @@ label {
 }
 
 .input-with-unit {
-    display: flex;
-    align-items: center;
+    display: flex; /* Flexboxを使う */
+    align-items: center; /* 垂直方向に中央揃え */
+    position: relative;
+    gap: 10px;
+}
+
+.input-with-unit input {
+    flex: 1; /* 入力フィールドが幅を取る */
+    box-sizing: border-box;
+    width: 730px;
+    height: 43px;
+    padding: 11px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1)
 }
 
 
 .unit {
-    margin-left: 5px;
-    font-size: 14px;
-    color: #555;
+    color: rgba(51, 51, 51, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    white-space: nowrap;
 }
 
-input, textarea {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+input {
+    width: 760px;
+    height: 43px;
+    gap: 10px;
     box-sizing: border-box;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+    padding: 11px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    background: rgba(255, 255, 255, 1);
+}
+
+input::placeholder {
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+}
+
+/* デフォルトのカレンダーマークを非表示 */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
 }
 
 textarea {
-    height: 100px;
+    width: 760px;
+    height: 160px;
+    padding: 11px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1);
     resize: none;
 }
 
 .error {
-    color: red;
+    color: rgba(246, 90, 90, 1);
     font-size: 12px;
     margin-top: 5px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
 .button-group {
@@ -85,37 +174,65 @@ textarea {
     margin-top: 20px;
 }
 
+.center-buttons {
+    display: flex;
+    gap: 20px; /* ボタン間の隙間 */
+    margin: 0 auto; /* 中央に配置 */
+}
+
+.delete-form {
+    margin-left: auto; /* ゴミ箱を右端に配置 */
+}
+
 .button {
     display: inline-block;
-    width: 100px;
-    padding: 10px;
     text-align: center;
-    font-size: 14px;
-    color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    width: 200px;
+    height: 50px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-weight: 600;
+    gap: 10px;
+    border-radius: 12px;
+    text-align: center;
+    ext-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 
 .back-button {
-    background-color: #ccc;
-    color: #000;
+    color: rgba(51, 51, 51, 1);
+    background: rgba(224, 223, 222, 1);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 24px;
+    padding: 13px 10px;
 }
 
 .save-button {
-    background: linear-gradient(90deg, #a3a6e1, #ffabd9);
-    color: #fff;
+    color: rgba(255, 255, 255, 1);
+    padding: 10px 0px 0px 0px;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.trash-icon-wrapper {
+    position: relative; /* 親要素として位置基準を設定 */
+    width: 30px; /* 親要素のサイズ調整 */
+    height: 35px; /* 全体の高さを少し大きくする */
 }
 
 .delete-button {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgba(246, 90, 90, 1);
 }
 
 .delete-button img {
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 24px;
 }
 
 .delete-button:hover img {
@@ -123,7 +240,19 @@ textarea {
 }
 
 .delete-icon {
-    width: 24px;
-    height: 24px;
-    display: block;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    color: rgba(246, 90, 90, 1);
+    left: 0;
+}
+
+.base-trash {
+    bottom: 0; /* 本体を下に配置 */
+    z-index: 1; /* 下の画像（trash.svg） */
+}
+
+.overlay-trash {
+    z-index: 2; /* 上の画像（trash1.svg） */
+    top: -3px; /* フタを少し上に調整 */
 }
