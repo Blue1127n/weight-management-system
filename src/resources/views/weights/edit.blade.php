@@ -9,7 +9,8 @@
 
 @section('content')
 <div class="container">
-    <h1 class="modal-title">Weight Log</h1>
+<div class="edit-container">
+    <h2 class="container-title">Weight Log</h2>
     <form action="{{ route('weight_logs.update', $weightLog->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -54,7 +55,7 @@
 
         <div class="form-group">
             <label for="exercise_content">運動内容</label>
-            <textarea name="exercise_content">{{ $weightLog->exercise_content }} placeholder="運動内容を追加"</textarea>
+            <textarea name="exercise_content" placeholder="運動内容を追加">{{ $weightLog->exercise_content }}</textarea>
             @error('exercise_content')
             <span class="error">{{ $message }}</span>
             @enderror
@@ -72,7 +73,8 @@
             </form>
         </div>
     </form>
-</div>
+    </div>
+    </div>
 @endsection
 
 @push('scripts')

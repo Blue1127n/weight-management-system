@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\WeightLog;
 use App\Models\WeightTarget;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {

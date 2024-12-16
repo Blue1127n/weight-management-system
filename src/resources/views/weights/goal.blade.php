@@ -17,12 +17,12 @@
 
             <div class="form-group">
                 <div class="input-group">
-                    <input type="number" name="target_weight" step="0.1" value="{{ $weightTarget }}" placeholder="46.5">
+                    <input type="number" name="target_weight" step="0.1" value="{{ old('target_weight', $weightTarget) }}" placeholder="46.5">
                     <span class="unit">kg</span>
                 </div>
-            @error('target_weight')
-                <span class="error">{{ $message }}</span>
-            @enderror
+                @error('target_weight')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="buttons">

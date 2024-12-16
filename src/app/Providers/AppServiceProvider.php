@@ -39,9 +39,10 @@ class AppServiceProvider extends ServiceProvider
 
             if (strpos((string)$value, '.') !== false) {
                 $decimals = strlen(substr(strrchr($value, '.'), 1));
+                \Log::info("小数点以下の桁数: {$decimals}");
                 return $decimals <= 1;
             }
             return true; // 小数点がなければ問題なし
-        });
+        },);
     }
 }

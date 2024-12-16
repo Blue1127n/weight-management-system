@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\WeightLog;
 use App\Models\WeightTarget;
+use App\Http\Requests\TargetWeightRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\WeightManagementRequest;
 use Illuminate\Support\Facades\Validator;
@@ -102,18 +103,21 @@ class WeightController extends Controller
     public function showGoalSetting()
     {
         $weightTarget = auth()->user()->weightTarget()->value('target_weight');
-
+        \Log::info('目標体重:', ['target_weight' => $weightTarget]); // デバッグログ
         return view('weights.goal', compact('weightTarget'));
     }
 
     // 目標体重の設定
-    public function setGoal(WeightManagementRequest $request)
+    public function setGoal(TargetWeightRequest $request)
     {
+        \Log::info('リクエストデータ:', $request->all());
         $user = auth()->user();
         WeightTarget::updateOrCreate(
             ['user_id' => $user->id],
             ['target_weight' => $request->target_weight]
         );
+
+        \Log::info('目標体重が更新されました:', ['target_weight' => $request->target_weight]);
 
         return redirect()->route('weight_logs');
     }
