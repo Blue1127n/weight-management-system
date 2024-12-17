@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 1512px;
     width: 100%;
     background-color: rgba(249, 249, 249, 1);
@@ -9,11 +10,16 @@
 }
 
 .edit-container {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     height: 828px;
     padding: 30px 20px;
     gap: 30px;
     background: rgba(255, 255, 255, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container-title {
@@ -171,19 +177,22 @@ textarea {
 
 .button-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-top: 20px;
+    gap: 20px;
 }
 
 .center-buttons {
     display: flex;
     gap: 20px;
-    margin: 0 auto;
 }
 
 .delete-form {
-    margin-left: auto;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
@@ -229,6 +238,10 @@ textarea {
     background: transparent;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
     color: rgba(246, 90, 90, 1);
 }
 
