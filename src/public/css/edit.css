@@ -49,23 +49,22 @@
 
 .triangle-icon {
     position: absolute;
-    right: 10px; /* 右端に配置 */
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 14px;
-    color: #555;
-    pointer-events: none; /* クリックを無効化 */
+    color: rgba(205, 205, 205, 1);
+    pointer-events: none;
 }
 
-/* Flatpickrのカスタムスタイル */
 .flatpickr-calendar {
-    z-index: 100; /* カレンダーが最前面に表示されるように */
+    z-index: 100;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
-    color: #333;
+    color: rgba(51, 51, 51, 1);
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 16px;
     font-weight: 300;
@@ -77,14 +76,14 @@ label {
 }
 
 .input-with-unit {
-    display: flex; /* Flexboxを使う */
-    align-items: center; /* 垂直方向に中央揃え */
+    display: flex;
+    align-items: center;
     position: relative;
     gap: 10px;
 }
 
 .input-with-unit input {
-    flex: 1; /* 入力フィールドが幅を取る */
+    flex: 1;
     box-sizing: border-box;
     width: 730px;
     height: 43px;
@@ -92,9 +91,8 @@ label {
     gap: 10px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(224, 223, 222, 1)
+    border: 1px solid rgba(224, 223, 222, 1);
 }
-
 
 .unit {
     color: rgba(51, 51, 51, 1);
@@ -138,9 +136,13 @@ input::placeholder {
     color: rgba(51, 51, 51, 1);
 }
 
-/* デフォルトのカレンダーマークを非表示 */
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none; /* 非表示にする */
+    pointer-events: none;
 }
 
 textarea {
@@ -176,12 +178,12 @@ textarea {
 
 .center-buttons {
     display: flex;
-    gap: 20px; /* ボタン間の隙間 */
-    margin: 0 auto; /* 中央に配置 */
+    gap: 20px;
+    margin: 0 auto;
 }
 
 .delete-form {
-    margin-left: auto; /* ゴミ箱を右端に配置 */
+    margin-left: auto;
 }
 
 .button {
@@ -196,7 +198,7 @@ textarea {
     gap: 10px;
     border-radius: 12px;
     text-align: center;
-    ext-underline-position: from-font;
+    text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
 
@@ -218,9 +220,9 @@ textarea {
 }
 
 .trash-icon-wrapper {
-    position: relative; /* 親要素として位置基準を設定 */
-    width: 30px; /* 親要素のサイズ調整 */
-    height: 35px; /* 全体の高さを少し大きくする */
+    position: relative;
+    width: 30px;
+    height: 35px;
 }
 
 .delete-button {
@@ -248,11 +250,11 @@ textarea {
 }
 
 .base-trash {
-    bottom: 0; /* 本体を下に配置 */
-    z-index: 1; /* 下の画像（trash.svg） */
+    bottom: 0;
+    z-index: 1;
 }
 
 .overlay-trash {
-    z-index: 2; /* 上の画像（trash1.svg） */
-    top: -3px; /* フタを少し上に調整 */
+    z-index: 2;
+    top: -3px;
 }

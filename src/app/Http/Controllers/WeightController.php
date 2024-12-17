@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\WeightManagementRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class WeightController extends Controller
 {
@@ -21,6 +22,11 @@ class WeightController extends Controller
         // セッションエラーをクリア
         session()->forget('errors');
 
+       // 古い入力データをクリア（新規モーダル表示用）
+        if (!$request->session()->has('open_modal')) {
+        session()->forget('_old_input');
+        }
+
         $user = auth()->user();
         if (!$user) {
             \Log::error('認証ユーザーが取得できませんでした。');
@@ -30,6 +36,11 @@ class WeightController extends Controller
         // ログインユーザーの体重ログを取得
         $logs = $user->weightLogs()->orderBy('date', 'desc')->paginate(8);
 
+        // 運動時間を H:i 形式に変換する
+        foreach ($logs as $log) {
+        $log->exercise_time = Carbon::createFromFormat('H:i:s', $log->exercise_time)->format('H:i');
+        }
+
         // 最新体重と目標体重を取得
         $currentWeight = $user->weightLogs()->latest('date')->value('weight');
         $weightTarget = $user->weightTarget()->value('target_weight');
@@ -37,26 +48,28 @@ class WeightController extends Controller
         return view('weights.index', compact('logs', 'currentWeight', 'weightTarget'));
     }
 
+    public function clearOldInput(Request $request)
+    {
+        session()->forget('_old_input'); // 古い入力データをクリア
+        return response()->json(['status' => 'success']);
+    }
+
     public function create()
-{
+    {
     return view('weights.create'); // 新規登録用のviewファイル
-}
+    }
 
 
     // 体重ログの登録
     public function store(WeightManagementRequest $request)
-    {
-        \Log::info('WeightManagementRequestのバリデーションが実行されました。');
-        \Log::info($request->all());
-        
-        try {
-            auth()->user()->weightLogs()->create($request->validated());
-            return redirect()->route('weight_logs')->with('success', '体重ログを登録しました。');
-        } catch (\Exception $e) {
-            \Log::error('エラーが発生しました: ', ['error' => $e->getMessage()]);
-            return back()->withErrors(['error' => '登録中にエラーが発生しました。'])->withInput();
-    }
-    }
+{
+    \Log::info('フォーム送信データ:', $request->all()); // 送信データの確認
+
+    // データ登録処理
+    auth()->user()->weightLogs()->create($request->validated());
+
+    return redirect()->route('weight_logs')->with('success', '体重ログを登録しました。');
+}
 
     // 検索機能
     public function search(Request $request)
@@ -73,17 +86,32 @@ class WeightController extends Controller
     public function edit($id)
     {
         $weightLog = WeightLog::findOrFail($id);
+        $weightLog->exercise_time = Carbon::parse($weightLog->exercise_time)->format('H:i');
+    
         return view('weights.edit', compact('weightLog'));
     }
 
     // 体重ログの更新
     public function update(WeightManagementRequest $request, $weightLogId)
-    {
-        $log = WeightLog::findOrFail($weightLogId);
-        $log->update($request->validated());
+{
+    \Log::info('送信された日付:', ['date' => $request->date]);
 
-        return redirect()->route('weight_logs');
-    }
+    $log = WeightLog::findOrFail($weightLogId);
+
+    // 送信された日付をAsia/Tokyoタイムゾーンで処理
+    $date = Carbon::createFromFormat('Y-m-d', $request->date, 'Asia/Tokyo')
+                ->toDateString();
+
+    $log->update([
+        'date' => $date,
+        'weight' => $request->weight,
+        'calories' => $request->calories,
+        'exercise_time' => $request->exercise_time,
+        'exercise_content' => $request->exercise_content,
+    ]);
+
+    return redirect()->route('weight_logs')->with('success', 'データを更新しました。');
+}
 
     // 体重ログの削除
     public function delete($weightLogId)

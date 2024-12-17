@@ -1,5 +1,8 @@
 FROM php:7.4.9-fpm
 
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && echo Asia/Tokyo > /etc/timezone
+
 COPY php.ini /usr/local/etc/php/
 
 RUN apt update \

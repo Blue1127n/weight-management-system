@@ -34,9 +34,6 @@
     font-size: 16px;
     font-weight: 300;
     line-height: 24px;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 24px;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
@@ -275,6 +272,7 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(51, 51, 51, 1);
+    border: none;
 }
 
 .results-table th {
@@ -788,19 +786,18 @@ textarea::placeholder {
         padding: 5px 10px;
     }
 
-    @media screen and (max-width: 768px) {
-        .container {
-            padding: 20px; /* モバイル向けの余白を調整 */
-        }
+    .container {
+        padding: 20px; /* モバイル向けの余白を調整 */
+    }
 
-        .stats-container {
-            flex-direction: column;
-            gap: 20px; /* 縦方向に間隔を追加 */
-        }
+    .stats-container {
+        flex-direction: column;
+        gap: 20px; /* 縦方向に間隔を追加 */
+    }
 
-        .search-container {
-            flex-direction: column;
-            gap: 20px;
-        }
+    .search-container {
+        flex-direction: column;
+        gap: 20px;
     }
 }
+

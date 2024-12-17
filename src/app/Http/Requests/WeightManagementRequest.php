@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class WeightManagementRequest extends FormRequest
 {
@@ -25,18 +26,8 @@ class WeightManagementRequest extends FormRequest
      */
     public function rules()
     {
-        \Log::info('WeightManagementRequestのバリデーションが実行されました。');
-        return [
-            'date' => [
-                'required',
-                'date',
-                function ($attribute, $value, $fail) {
-                    \Log::info("送信された日付: {$value}");
-                    if ($value === now()->format('Y-m-d')) {
-                        $fail('日付を入力してください');
-                    }
-                },
-            ],
+          return [
+            'date' => 'required|date',
             'weight' => [
             'required',
             'numeric',
@@ -65,9 +56,17 @@ class WeightManagementRequest extends FormRequest
     }
 
     public function failedValidation(Validator $validator)
-    {
-        \Log::error('バリデーションエラー詳細:', $validator->errors()->toArray());
-        parent::failedValidation($validator);
-    }
+{
+    \Log::error('バリデーションエラー詳細:', $validator->errors()->toArray());
+
+    // エラーメッセージと入力値を保持し、モーダルを開くフラグを追加
+    throw new HttpResponseException(
+        redirect()->back()
+            ->withErrors($validator->errors()) // エラーメッセージをセット
+            ->withInput()                     // 入力値を保持
+            ->with('open_modal', true)        // モーダルを開くフラグをセット
+    );
+}
+
 }
 

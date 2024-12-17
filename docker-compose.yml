@@ -19,6 +19,9 @@ services:
     ports:
       - "8000:8000"
 
+    environment:
+      - TZ=Asia/Tokyo
+
   mysql:
     image: mysql:8.0.26
     environment:

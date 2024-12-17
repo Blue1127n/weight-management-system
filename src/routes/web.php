@@ -36,4 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/weight_logs/{weightLogId}/delete', [WeightController::class, 'delete'])->name('weight_logs.destroy');
     Route::get('/weight_logs/goal_setting', [WeightController::class, 'showGoalSetting'])->name('weight_logs.goal_setting');
     Route::post('/weight_logs/goal_setting', [WeightController::class, 'setGoal'])->name('weight_logs.set_goal');
+
+    // 古い入力データクリア用のルート
+    Route::post('/clear-old-input', [WeightController::class, 'clearOldInput'])->name('clear_old_input');
 });

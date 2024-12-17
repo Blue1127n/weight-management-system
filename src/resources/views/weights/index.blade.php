@@ -70,7 +70,7 @@
                 <tbody>
                     @foreach ($logs as $log)
                     <tr>
-                        <td class="cell-date">{{ $log->date->format('Y/m/d') }}</td>
+                        <td class="cell-date">{{ \Carbon\Carbon::parse($log->date)->format('Y/m/d') }}</td>
                         <td class="cell-weight">{{ $log->weight }} kg</td>
                         <td class="cell-calories">{{ $log->calories }} cal</td>
                         <td class="cell-exercise">{{ $log->exercise_time }}</td>
@@ -92,7 +92,7 @@
 <div class="index-modal hidden" id="index-modal">
     <div class="modal-content">
         <h2 class="modal-title">Weight Logを追加</h2>
-        <form action="{{ route('weight_logs.store') }}" method="POST">
+        <form action="{{ route('weight_logs.store') }}" method="POST" autocomplete="off">
         @csrf
 
         <div class="form-group">
@@ -128,8 +128,7 @@
 
         <div class="form-group">
             <label for="exercise_time" class="label-with-required">運動時間<span class="required-label">必須</span></label>
-                <input type="text" id="exercise_time" name="exercise_time" value="{{ old('exercise_time') }}" placeholder="00：00" onfocus="(this.type='time')" 
-                onblur="if(this.value===''){this.type='text'; this.placeholder='00:00';}">
+                <input type="time" id="exercise_time" name="exercise_time" value="{{ old('exercise_time') }}" placeholder="00:00">
                 @error('exercise_time')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -154,56 +153,47 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const showModalButton = document.getElementById('show-modal');
-    const modal = document.getElementById('index-modal');
-    const closeModalButton = document.getElementById('close-modal');
+document.addEventListener('DOMContentLoaded', function () {
+    const showModalButton = document.getElementById('show-modal'); // 「データ追加」ボタン
+    const modal = document.getElementById('index-modal'); // モーダル
+    const closeModalButton = document.getElementById('close-modal'); // 「戻る」ボタン
+    const modalForm = modal.querySelector('form'); // モーダル内のフォーム
 
-    // 「データ追加」ボタンでモーダルを表示
-    if (showModalButton && modal && closeModalButton) {
-        // 「データ追加」ボタンのクリックイベント
+    // セッションにモーダル表示フラグがある場合、モーダルを表示
+    @if (session('open_modal'))
+        modal.classList.remove('hidden'); // モーダルを再表示
+    @endif
+
+    // 「データ追加」ボタンでモーダルを開く
+    if (showModalButton && modal && modalForm) {
         showModalButton.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-
-            const errorMessages = document.querySelectorAll('.error-message');
-            errorMessages.forEach(error => error.textContent = ''); // メッセージをクリア
-
-        // モーダル内の日付フィールドにデフォルト値（今日の日付）を設定
-        const dateField = modal.querySelector('input[name="date"]');
-            if (dateField && !dateField.value) {
-                const today = new Date().toISOString().split('T')[0]; // 今日の日付
-                dateField.value = today;
-            }
+            // サーバーの _old_input をクリア
+            fetch("{{ route('clear_old_input') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json',
+                }
+            }).then(response => response.json()).then(data => {
+                if (data.status === 'success') {
+                    // フォームを完全にリセット
+                    modalForm.reset();
+                    modal.classList.remove('hidden');
+                    const dateField = modalForm.querySelector('input[name="date"]');
+                    if (dateField) {
+                        dateField.value = new Date().toISOString().split('T')[0];
+                    }
+                }
+            });
         });
+    }
 
-        // モーダルを閉じるボタンのクリックイベント
+    // 「戻る」ボタンでモーダルを閉じる
+    if (closeModalButton && modal && modalForm) {
         closeModalButton.addEventListener('click', () => {
             modal.classList.add('hidden');
-
-            // フォームのリセット処理を追加
-            const form = modal.querySelector('form');
-                if (form) {
-                    form.reset(); // フォーム全体をリセット
-
-            // 必要に応じてデフォルト値を再設定
-            const dateField = form.querySelector('input[name="date"]');
-                if (dateField) {
-                    dateField.value = ""; // デフォルト値を空にリセット
-                }
-            }
+            modalForm.reset();
         });
-    }
-
-    // エラーメッセージがある場合にモーダルを自動表示
-    if (document.querySelector('.error-message')) {
-        modal.classList.remove('hidden');
-    }
-
-    // 日付が空の場合に当日の日付を設定
-    const dateField = document.getElementById('date-field');
-    if (dateField && !dateField.value) {
-        const today = new Date().toISOString().split('T')[0]; // 今日の日付を取得
-        dateField.value = today;
     }
 });
 </script>

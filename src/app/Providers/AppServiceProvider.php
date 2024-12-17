@@ -24,25 +24,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 整数部分が4桁以内かチェック
         Validator::extend('valid_integer_part', function ($attribute, $value, $parameters, $validator) {
             \Log::info("valid_integer_part: {$attribute} = {$value}");
-            return strlen((string)floor($value)) <= 4;
+            $result = strlen((string)floor($value)) <= 4;
+            \Log::info("valid_integer_part result: " . ($result ? 'Pass' : 'Fail'));
+            return $result;
         });
-
-        // 小数点以下が1桁以内かチェック
+        
         Validator::extend('valid_decimal_part', function ($attribute, $value, $parameters, $validator) {
             \Log::info("valid_decimal_partバリデーションが実行されました。値: {$value}");
             if (!is_numeric($value)) {
-                return false; // 数値以外は無効
+                \Log::info("Not a numeric value");
+                return false; 
             }
-
             if (strpos((string)$value, '.') !== false) {
                 $decimals = strlen(substr(strrchr($value, '.'), 1));
                 \Log::info("小数点以下の桁数: {$decimals}");
-                return $decimals <= 1;
+                $result = $decimals <= 1;
+                \Log::info("valid_decimal_part result: " . ($result ? 'Pass' : 'Fail'));
+                return $result;
             }
-            return true; // 小数点がなければ問題なし
-        },);
+            return true;
+        });
+        
     }
 }
