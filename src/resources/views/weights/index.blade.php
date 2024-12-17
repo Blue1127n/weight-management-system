@@ -14,38 +14,57 @@
             <div class="stat-label">目標体重</div>
             <div class="stat-value">{{ $weightTarget ?? '-' }} <span class="unit">kg</span></div>
         </div>
-        <div class="stat-divider"></div>
+
+    <div class="stat-divider"></div>
         <div class="stat-box">
             <div class="stat-label">目標まで</div>
-            <div class="stat-value">{{ $currentWeight && $weightTarget ? $currentWeight - $weightTarget : '-' }} <span class="unit">kg</span></div>
-        </div>
+                <div class="stat-value">
+                    @if ($currentWeight && $weightTarget)
+                        @php
+                            $difference = $currentWeight - $weightTarget;
+                        @endphp
+
+                        @if ($difference < 0)
+                            {{ number_format(abs($difference), 1) }}
+                        @elseif ($difference == 0)
+                            0
+                        @else
+                            -{{ number_format(abs($difference), 1) }}
+                        @endif
+
+                    @else
+                        -
+                    @endif
+                    <span class="unit">kg</span></div>
+                </div>
+
         <div class="stat-divider"></div>
-        <div class="stat-box">
-            <div class="stat-label">最新体重</div>
-            <div class="stat-value">{{ $currentWeight ?? '-' }} <span class="unit">kg</span></div>
-        </div>
-    </div>
+                <div class="stat-box">
+                    <div class="stat-label">最新体重</div>
+                        <div class="stat-value">{{ $currentWeight ?? '-' }} <span class="unit">kg</span></div>
+                    </div>
+                </div>
 
     <div class="main-content">
         <div class="search-container">
-        <form action="{{ route('weight_logs') }}" method="GET" class="search-form">
-            <div class="search-fields">
-                <div class="input-container">
-                    <input type="date" name="start_date" value="{{ request('start_date') }}" placeholder="年/月/日">
-                    <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+            <form action="{{ route('weight_logs') }}" method="GET" class="search-form">
+                <div class="search-fields">
+                    <div class="input-container">
+                        <input type="date" name="start_date" value="{{ request('start_date') }}" placeholder="年/月/日">
+                        <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+                    </div>
+                    <span class="date-separator">〜</span>
+                    <div class="input-container">
+                        <input type="date" name="end_date" value="{{ request('end_date') }}" placeholder="年/月/日">
+                        <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
+                    </div>
+                    <button type="submit" class="button search-button">検索</button>
+                        @if(request('start_date') || request('end_date'))
+                    <a href="{{ route('weight_logs') }}" class="button reset-button">リセット</a>
+                        @endif
                 </div>
-                <span class="date-separator">〜</span>
-                <div class="input-container">
-                    <input type="date" name="end_date" value="{{ request('end_date') }}" placeholder="年/月/日">
-                    <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
-                </div>
-                <button type="submit" class="button search-button">検索</button>
-                @if(request('start_date') || request('end_date'))
-                <a href="{{ route('weight_logs') }}" class="button reset-button">リセット</a>
-                @endif
-            </div>
-        </form>
-        <button class="button add-data-button" id="show-modal">データ追加</button>
+            </form>
+            <button class="button add-data-button" id="show-modal">データ追加</button>
         </div>
 
         <div class="search-result-info">
@@ -56,35 +75,36 @@
         </div>
 
         <div class="results">
-        @if ($logs->isNotEmpty())
-            <table class="results-table">
-                <thead>
-                    <tr>
-                        <th class="column-date">日付</th>
-                        <th class="column-weight">体重</th>
-                        <th class="column-calories">摂取カロリー</th>
-                        <th class="column-exercise">運動時間</th>
-                        <th class="column-edit"></th>
-                    </tr>
-                </thead>
-                <tbody>
+            @if ($logs->isNotEmpty())
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th class="column-date">日付</th>
+                            <th class="column-weight">体重</th>
+                            <th class="column-calories">摂取カロリー</th>
+                            <th class="column-exercise">運動時間</th>
+                            <th class="column-edit"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     @foreach ($logs as $log)
-                    <tr>
-                        <td class="cell-date">{{ \Carbon\Carbon::parse($log->date)->format('Y/m/d') }}</td>
-                        <td class="cell-weight">{{ $log->weight }} kg</td>
-                        <td class="cell-calories">{{ $log->calories }} cal</td>
-                        <td class="cell-exercise">{{ $log->exercise_time }}</td>
-                        <td class="cell-edit">
+                        <tr>
+                            <td class="cell-date">{{ \Carbon\Carbon::parse($log->date)->format('Y/m/d') }}</td>
+                            <td class="cell-weight">{{ $log->weight }} kg</td>
+                            <td class="cell-calories">{{ $log->calories }} cal</td>
+                            <td class="cell-exercise">{{ $log->exercise_time }}</td>
+                            <td class="cell-edit">
                             <a href="{{ route('weight_logs.edit', $log->id) }}" class="edit-icon"><img src="{{ asset('images/pen.svg') }}" alt="編集" /></a>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     @endforeach
-                </tbody>
-            </table>
-            <div class="pagination-container">
-                {{ $logs->links('pagination::bootstrap-4') }}
-            </div>
-        @endif
+                    </tbody>
+                </table>
+
+                <div class="pagination-container">
+                    {{ $logs->links('pagination::bootstrap-4') }}
+                </div>
+            @endif
         </div>
     </div>
 </div>
@@ -97,8 +117,9 @@
 
         <div class="form-group">
             <label for="date" class="label-with-required">日付<span class="required-label">必須</span></label>
-            <div class="date-input-container">
-            <input type="date" id="date-field" name="date" value="{{ old('date', now()->format('Y-m-d')) }}" placeholder="年/月/日" required>
+                <div class="date-input-container">
+                    <input type="date" id="date-field" name="date" value="{{ old('date', now()->format('Y-m-d')) }}" placeholder="年/月/日" required>
+                </div>
                 @error('date')
                     <p class="error-message">{{ $message }}</p>
                 @enderror
@@ -154,20 +175,20 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const showModalButton = document.getElementById('show-modal'); // 「データ追加」ボタン
-    const modal = document.getElementById('index-modal'); // モーダル
-    const closeModalButton = document.getElementById('close-modal'); // 「戻る」ボタン
-    const modalForm = modal.querySelector('form'); // モーダル内のフォーム
+    const showModalButton = document.getElementById('show-modal');
+    const modal = document.getElementById('index-modal');
+    const closeModalButton = document.getElementById('close-modal');
+    const modalForm = modal.querySelector('form');
 
-    // セッションにモーダル表示フラグがある場合、モーダルを表示
+
     @if (session('open_modal'))
-        modal.classList.remove('hidden'); // モーダルを再表示
+        modal.classList.remove('hidden');
     @endif
 
-    // 「データ追加」ボタンでモーダルを開く
+
     if (showModalButton && modal && modalForm) {
         showModalButton.addEventListener('click', () => {
-            // サーバーの _old_input をクリア
+
             fetch("{{ route('clear_old_input') }}", {
                 method: 'POST',
                 headers: {
@@ -176,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }).then(response => response.json()).then(data => {
                 if (data.status === 'success') {
-                    // フォームを完全にリセット
+
                     modalForm.reset();
                     modal.classList.remove('hidden');
                     const dateField = modalForm.querySelector('input[name="date"]');
@@ -188,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 「戻る」ボタンでモーダルを閉じる
+
     if (closeModalButton && modal && modalForm) {
         closeModalButton.addEventListener('click', () => {
             modal.classList.add('hidden');
