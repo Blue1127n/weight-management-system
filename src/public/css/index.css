@@ -214,14 +214,24 @@
 }
 
 .search-result-info {
+    left: 0;
+    top: 50px;
+    margin-top: 5px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
     text-align: left;
-    margin-bottom: 10px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
 }
 
 .search-conditions {
     font-size: 16px;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
+    margin: 0;
 }
 
 .search-count {
