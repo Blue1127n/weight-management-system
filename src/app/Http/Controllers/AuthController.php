@@ -32,10 +32,8 @@ public function storeStep1(RegisterRequest $request)
         'password' => Hash::make($request->password),
     ]);
 
-    // ユーザーをログイン状態にする
     auth()->login($user);
 
-    // データ処理
     return redirect()->route('register.step2');
 }
 
@@ -52,16 +50,13 @@ public function storeStep1(RegisterRequest $request)
     \Log::info('リクエストデータ:', $request->all());
 
 
-    // 現在の認証ユーザーを取得
     $user = auth()->user();
 
-    // 目標体重を保存
     WeightTarget::create([
         'user_id' => $user->id,
         'target_weight' => $request->target_weight,
     ]);
 
-    // 現在の体重を保存
     WeightLog::create([
         'user_id' => $user->id,
         'date' => now(),
@@ -74,7 +69,6 @@ public function storeStep1(RegisterRequest $request)
     return redirect()->route('weight_logs');
 }
 
-// ログイン
 public function showLogin()
 {
     \Log::info('showLogin メソッドが呼び出されました');
@@ -83,7 +77,6 @@ public function showLogin()
 
 public function login(LoginRequest $request)
 {
-    // デバッグ用ログ
     \Log::info('CSRFトークン:', ['token' => csrf_token()]);
     \Log::info('セッションID:', ['session_id' => session()->getId()]);
     \Log::info('セッションデータ（ログイン前）:', session()->all());
@@ -97,7 +90,6 @@ public function login(LoginRequest $request)
         Log::info('認証成功', ['email' => $credentials['email']]);
         Log::info('ログインユーザー:', ['user' => Auth::user()->toArray()]);
 
-        // セッションデータを確認
         Log::info('セッションID:', ['session_id' => session()->getId()]);
         Log::info('セッションデータ:', session()->all());
 
@@ -112,7 +104,6 @@ public function login(LoginRequest $request)
 
     public function logout(Request $request)
     {
-        // ログアウト処理
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

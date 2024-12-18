@@ -26,7 +26,7 @@ class WeightManagementRequest extends FormRequest
      */
     public function rules()
     {
-          return [
+        return [
             'date' => 'required|date',
             'weight' => [
             'required',
@@ -59,12 +59,11 @@ class WeightManagementRequest extends FormRequest
 {
     \Log::error('バリデーションエラー詳細:', $validator->errors()->toArray());
 
-    // エラーメッセージと入力値を保持し、モーダルを開くフラグを追加
     throw new HttpResponseException(
         redirect()->back()
-            ->withErrors($validator->errors()) // エラーメッセージをセット
-            ->withInput()                     // 入力値を保持
-            ->with('open_modal', true)        // モーダルを開くフラグをセット
+            ->withErrors($validator->errors())
+            ->withInput()
+            ->with('open_modal', true)
     );
 }
 

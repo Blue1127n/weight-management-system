@@ -30,12 +30,12 @@ class AppServiceProvider extends ServiceProvider
             \Log::info("valid_integer_part result: " . ($result ? 'Pass' : 'Fail'));
             return $result;
         });
-        
+
         Validator::extend('valid_decimal_part', function ($attribute, $value, $parameters, $validator) {
             \Log::info("valid_decimal_partバリデーションが実行されました。値: {$value}");
             if (!is_numeric($value)) {
                 \Log::info("Not a numeric value");
-                return false; 
+                return false;
             }
             if (strpos((string)$value, '.') !== false) {
                 $decimals = strlen(substr(strrchr($value, '.'), 1));
@@ -46,6 +46,5 @@ class AppServiceProvider extends ServiceProvider
             }
             return true;
         });
-        
     }
 }

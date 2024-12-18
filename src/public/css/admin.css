@@ -1,6 +1,5 @@
 body {
     width: 1512px;
-    background-color: rgba(255, 255, 255, 1);
     margin: 0;
     padding: 0;
 }
@@ -13,6 +12,7 @@ body {
     gap: 0px;
     background-color: #fff;
     border-bottom: 1px solid rgba(205, 205, 205, 1);
+    background-color: rgba(255, 255, 255, 1);
     width: 100%;
     height: 71px;
     box-sizing: border-box;
@@ -60,9 +60,9 @@ body {
 
 .goal-button .icon {
     display: flex;
-    align-items: center; /* 中央揃え */
-    width: 22.68px; /* アイコンの幅 */
-    height: 24px; /* アイコンの高さ */
+    align-items: center;
+    width: 22.68px;
+    height: 24px;
     left: 0.66px;
     gap: 5px;
     color: rgba(51, 51, 51, 1);
@@ -72,27 +72,24 @@ body {
     background-color: rgba(247, 247, 247, 1);
 }
 
-/* 親要素を基準にする */
 .logout-icon {
     position: relative;
-    width: 24px; /* アイコン全体のサイズ */
+    width: 24px;
     height: 22.93px;
     top: 0.54px;
     gap: 0px;
     color: rgba(51, 51, 51, 1);
 }
 
-/* 各レイヤーのスタイル */
 .icon-layer {
     position: absolute;
-    width: 24px; /* SVGサイズを統一 */
+    width: 24px;
     height: 24px;
 }
 
-/* 個別の配置 */
 .icon-layer.door {
     left: 0;
-    z-index: 1; /* 一番下のレイヤー */
+    z-index: 1;
     width: 10.84px;
     height: 22.93px;
     top: 0.54px;
@@ -129,4 +126,48 @@ body {
 
 .logout-button:hover {
     background-color: rgba(247, 247, 247, 1);
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav .button {
+        width: 100%;
+        max-width: 200px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .goal-button .icon,
+    .icon-layer {
+        width: 16px;
+        height: 16px;
+    }
+
+    .nav .button {
+        font-size: 12px;
+        height: 40px;
+    }
+
+    .logout-button {
+        font-size: 12px;
+        padding: 8px;
+    }
 }

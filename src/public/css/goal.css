@@ -3,8 +3,8 @@
     height: 100vh;
     padding: 307px 521px;
     display: flex;
-    justify-content: center; /* 水平方向中央揃え */
-    align-items: center; /* 垂直方向中央揃え */
+    justify-content: center;
+    align-items: center;
     background-color: rgba(249, 249, 249, 1);
 }
 
@@ -15,9 +15,9 @@
     gap: 50px;
     background-color: rgba(255, 255, 255, 1);
     display: flex;
-    flex-direction: column; /* 要素を縦並び */
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center; /* 水平方向中央揃え */
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -33,7 +33,6 @@
     text-align: center;
 }
 
-/* 入力フィールドのラッパー */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -82,7 +81,7 @@ input[type="number"] {
 
 .buttons {
     display: flex;
-    justify-content: center; /* ボタンを中央揃え */
+    justify-content: center;
     margin-top: 0px;
     gap: 20px;
     width: 100%;
@@ -134,4 +133,65 @@ input[type="number"] {
     line-height: 21px;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+        height: auto;
+    }
+
+    .form-wrapper {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .form-title {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    input[type="number"] {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 10px;
+    }
+
+    .form-title {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .form-wrapper {
+        padding: 15px;
+    }
+
+    input[type="number"] {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .buttons {
+        gap: 5px;
+    }
+
+    .button {
+        font-size: 14px;
+        height: 45px;
+    }
 }

@@ -5,6 +5,7 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -12,10 +13,12 @@
     <div class="stats-container">
         <div class="stat-box">
             <div class="stat-label">目標体重</div>
-            <div class="stat-value">{{ $weightTarget ?? '-' }} <span class="unit">kg</span></div>
+            <div class="stat-value">{{ $weightTarget ?? '-' }} <span class="unit">kg</span>
+            </div>
         </div>
 
-    <div class="stat-divider"></div>
+            <div class="stat-divider"></div>
+
         <div class="stat-box">
             <div class="stat-label">目標まで</div>
                 <div class="stat-value">
@@ -24,26 +27,29 @@
                             $difference = $currentWeight - $weightTarget;
                         @endphp
 
-                        @if ($difference < 0)
-                            {{ number_format(abs($difference), 1) }}
+                    @if ($difference < 0)
+                        {{ number_format(abs($difference), 1) }}
                         @elseif ($difference == 0)
                             0
                         @else
                             -{{ number_format(abs($difference), 1) }}
-                        @endif
+                    @endif
 
                     @else
                         -
                     @endif
-                    <span class="unit">kg</span></div>
+                    <span class="unit">kg</span>
                 </div>
+        </div>
 
-        <div class="stat-divider"></div>
-                <div class="stat-box">
-                    <div class="stat-label">最新体重</div>
-                        <div class="stat-value">{{ $currentWeight ?? '-' }} <span class="unit">kg</span></div>
-                    </div>
+            <div class="stat-divider"></div>
+
+        <div class="stat-box">
+            <div class="stat-label">最新体重</div>
+                <div class="stat-value">{{ $currentWeight ?? '-' }} <span class="unit">kg</span>
                 </div>
+        </div>
+    </div>
 
     <div class="main-content">
         <div class="search-container">
@@ -53,24 +59,30 @@
                         <input type="date" name="start_date" value="{{ request('start_date') }}" placeholder="年/月/日">
                         <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
                     </div>
-                    <span class="date-separator">〜</span>
+                        <span class="date-separator">〜</span>
                     <div class="input-container">
                         <input type="date" name="end_date" value="{{ request('end_date') }}" placeholder="年/月/日">
                         <img src="{{ asset('images/Polygon.svg') }}" class="calendar-icon" alt="カレンダーアイコン">
                     </div>
+
                     <button type="submit" class="button search-button">検索</button>
                         @if(request('start_date') || request('end_date'))
-                    <a href="{{ route('weight_logs') }}" class="button reset-button">リセット</a>
+                            <a href="{{ route('weight_logs') }}" class="button reset-button">リセット</a>
                         @endif
                 </div>
             </form>
+
             <button class="button add-data-button" id="show-modal">データ追加</button>
         </div>
 
         <div class="search-result-info">
             <p class="search-conditions">
-                {{ request('start_date') }} 〜 {{ request('end_date') }} の検索結果
-                <span class="search-count">{{ $logs->total() }}件</span>
+                @if (request('start_date') && request('end_date'))
+                {{ \Carbon\Carbon::parse(request('start_date'))->format('Y年n月j日') }} 〜
+                {{ \Carbon\Carbon::parse(request('end_date'))->format('Y年n月j日') }}
+                @endif
+                の検索結果
+                    <span class="search-count">{{ $logs->total() }}件</span>
             </p>
         </div>
 
@@ -102,7 +114,7 @@
                 </table>
 
                 <div class="pagination-container">
-                    {{ $logs->links('pagination::bootstrap-4') }}
+                {{ $logs->links('pagination::simple-bootstrap-4') }}
                 </div>
             @endif
         </div>
@@ -180,12 +192,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModalButton = document.getElementById('close-modal');
     const modalForm = modal.querySelector('form');
 
-    // セッションのopen_modalがある場合、モーダルを表示
     @if (session('open_modal'))
         modal.classList.remove('hidden');
     @endif
 
-    // モーダル表示時の処理
     if (showModalButton && modal && modalForm) {
         showModalButton.addEventListener('click', () => {
             fetch("{{ route('clear_old_input') }}", {
@@ -199,21 +209,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalForm.reset();
                     modal.classList.remove('hidden');
 
-                    // 日付フィールドに当日の日付を設定
                     const dateField = modalForm.querySelector('input[name="date"]');
                     if (dateField) {
                         const today = new Date();
                         const formattedDate = today.getFullYear() + '-' +
                             ('0' + (today.getMonth() + 1)).slice(-2) + '-' +
                             ('0' + today.getDate()).slice(-2);
-                        dateField.value = formattedDate; // YYYY-MM-DD形式
+                        dateField.value = formattedDate;
                     }
                 }
             });
         });
     }
 
-    // 「戻る」ボタンの処理
     if (closeModalButton && modal && modalForm) {
         closeModalButton.addEventListener('click', () => {
             modal.classList.add('hidden');
@@ -221,6 +229,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
 </script>
 @endpush

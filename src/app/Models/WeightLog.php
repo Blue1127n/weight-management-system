@@ -19,7 +19,7 @@ class WeightLog extends Model
     ];
 
     protected $casts = [
-        'date' => 'date', // 'date'カラムをCarbonインスタンスとして扱う
+        'date' => 'date',
     ];
 
     public function user()

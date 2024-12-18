@@ -1,4 +1,3 @@
-/* フォームコンテナ */
 .form-container {
     width: 580px;
     margin: 20px auto;
@@ -11,7 +10,7 @@
 }
 
 .form-container.has-errors {
-    height: 845px !important; /* エラー時の高さ */
+    height: 845px !important;
 }
 
 .logo-text {
@@ -43,7 +42,6 @@
     text-align: center;
 }
 
-/* ステップ説明 */
 .form-container p {
     font-size: 16px;
     color: rgba(51, 51, 51, 1);
@@ -57,10 +55,9 @@
 }
 
 .form-group {
-    margin-bottom: 20px; /* 各フォームグループ間の間隔を統一 */
+    margin-bottom: 20px;
 }
 
-/* ラベル */
 .form-container label {
     display: block;
     text-align: left;
@@ -75,7 +72,6 @@
     margin-bottom: 5px;
 }
 
-/* 入力フィールド */
 .form-container input {
     width: 500px;
     height: 43px;
@@ -96,8 +92,8 @@
 }
 
 .form-container input::placeholder {
-    color: rgba(205, 205, 205, 1); /* プレースホルダーの文字色 */
-    font-family: Hiragino Kaku Gothic Pro; /* フォントを継承 */
+    color: rgba(205, 205, 205, 1);
+    font-family: Hiragino Kaku Gothic Pro;
     font-size: 14px;
     font-weight: 300;
     line-height: 21px;
@@ -106,7 +102,6 @@
     text-decoration-skip-ink: none;
 }
 
-/* ボタン */
 .form-container button {
     width: 250px;
     height: 50px;
@@ -132,7 +127,6 @@
     background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
 }
 
-/* エラーメッセージ */
 .error {
     height: auto;
     color: rgba(246, 90, 90, 1);
@@ -150,15 +144,14 @@
 }
 
 .error span {
-    display: inline-block; /* 必要に応じて指定 */
-    line-height: 1.5; /* 行間を調整 */
+    display: inline-block;
+    line-height: 1.5;
 }
 
 .form-group .error {
-    min-height: 10px; /* エラーメッセージの最低高さを指定 */
+    min-height: 10px;
 }
 
-/* リンク */
 .form-container a {
     display: block;
     margin-top: 10px;
@@ -172,50 +165,49 @@
     color: rgba(44, 153, 255, 1);
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .form-container {
-        width: 90%; /* 横幅を90%に調整 */
-        padding: 20px; /* パディングを小さく */
+        width: 90%;
+        padding: 20px;
     }
 
     .logo-text {
-        font-size: 30px; /* ロゴのフォントサイズを調整 */
-        line-height: 40px; /* 行間も調整 */
+        font-size: 30px;
+        line-height: 40px;
     }
 
     .form-container input {
-        width: 100%; /* 入力フィールドを親要素に合わせる */
-        font-size: 14px; /* フォントサイズを小さく */
+        width: 100%;
+        font-size: 14px;
     }
 
     .form-container button {
-        font-size: 14px; /* ボタンのフォントサイズを小さく */
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .form-container {
-        width: 95%; /* 横幅をさらに縮小 */
-        padding: 15px; /* パディングをさらに小さく */
+        width: 95%;
+        padding: 15px;
     }
 
     .logo-text {
-        font-size: 20px; /* ロゴをより小さく */
-        line-height: 28px; /* 行間を縮小 */
+        font-size: 20px;
+        line-height: 28px;
     }
 
     .sub-title {
-        font-size: 18px; /* サブタイトルのフォントサイズ */
-        line-height: 24px; /* 行間 */
+        font-size: 18px;
+        line-height: 24px;
     }
 
     .form-container input {
-        width: 100%; /* 入力フィールドを幅いっぱいに */
-        font-size: 12px; /* フォントサイズを縮小 */
+        width: 100%;
+        font-size: 12px;
     }
 
     .form-container button {
-        font-size: 12px; /* ボタンのフォントサイズを小さく */
+        font-size: 12px;
     }
 }

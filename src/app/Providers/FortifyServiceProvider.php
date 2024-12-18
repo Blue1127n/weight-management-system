@@ -45,17 +45,16 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-        // カスタムビューを登録 (ここに追記)
         Fortify::registerView(function () {
             return view('auth.register-step1');
         });
 
         Fortify::loginView(function () {
-            return view('auth.login'); // 必要に応じてログイン画面もカスタマイズ
+            return view('auth.login');
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            return view('auth.forgot-password'); // 必要に応じてパスワードリセットリンクもカスタマイズ
+            return view('auth.forgot-password');
         });
 
         Fortify::resetPasswordView(function ($request) {

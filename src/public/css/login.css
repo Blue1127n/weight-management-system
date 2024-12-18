@@ -1,4 +1,3 @@
-/* フォームコンテナ */
 .form-container {
     width: 580px;
     margin: 40px auto;
@@ -10,7 +9,6 @@
     text-align: center;
 }
 
-/* ロゴテキスト */
 .logo-text {
     font-family: 'Lora', serif;
     font-size: 60px;
@@ -24,7 +22,6 @@
     margin-bottom: 10px;
 }
 
-/* サブタイトル */
 .sub-title {
     font-family: Hiragino Mincho Pro;
     font-size: 30px;
@@ -38,13 +35,11 @@
     margin-bottom: 20px;
 }
 
-/* フォームグループ */
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
-/* ラベル */
 .form-group label {
     display: block;
     font-family: Hiragino Kaku Gothic Pro;
@@ -57,7 +52,6 @@
     margin-bottom: 5px;
 }
 
-/* 入力フィールド */
 .form-group input {
     width: 500px;
     height: 43px;
@@ -69,7 +63,6 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-/* プレースホルダーの色 */
 .form-group input::placeholder {
     color: rgba(205, 205, 205, 1);
     font-family: Hiragino Kaku Gothic Pro;
@@ -81,7 +74,6 @@
     text-decoration-skip-ink: none;
 }
 
-/* エラーメッセージ */
 .error {
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 14px;
@@ -92,10 +84,10 @@
     text-decoration-skip-ink: none;
     color: rgba(246, 90, 90, 1);
     margin-top: 5px;
-    min-height: 21px; /* エラーメッセージがない場合の高さを確保 */
+    min-height: 21px;
 }
 
-/* ログインボタン */
+
 .login-button {
     width: 250px;
     height: 50px;
@@ -121,7 +113,6 @@
     background: linear-gradient(90deg, #9396d2 0%, #f09dcd 100%);
 }
 
-/* アカウント作成リンク */
 .register-link {
     display: block;
     margin-top: 15px;
@@ -139,4 +130,70 @@
 
 .register-link:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .logo-text {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .sub-title {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .form-group input {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .login-button {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .register-link {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .logo-text {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .sub-title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input {
+        font-size: 12px;
+        height: 36px;
+    }
+
+    .login-button {
+        font-size: 16px;
+        height: 45px;
+    }
+
+    .register-link {
+        font-size: 12px;
+    }
 }

@@ -31,6 +31,8 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(51, 51, 51, 1);
+    margin-left: 0px;
+    width: 100%;
 }
 
 .form-group {
@@ -146,7 +148,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
-    display: none; /* 非表示にする */
+    display: none;
     pointer-events: none;
 }
 
@@ -188,8 +190,8 @@ textarea {
 
 .delete-form {
     position: absolute;
-    right: 20px; /* 右端から20px */
-    bottom: 100px; /* 下端から20px */
+    right: 20px;
+    bottom: 120px;
 }
 
 .button {
@@ -274,4 +276,91 @@ textarea {
     z-index: 2;
     top: -3px;
     left: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        height: auto;
+        padding: 20px;
+    }
+
+    .edit-container {
+        padding: 20px;
+        height: auto;
+    }
+
+    .container-title {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .input-with-unit input,
+    .input-with-icon input,
+    textarea {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .unit {
+        font-size: 14px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button {
+        width: 100%;
+        font-size: 16px;
+        height: 45px;
+    }
+
+    .delete-form {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .container-title {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .edit-container {
+        padding: 15px;
+    }
+
+    .input-with-unit input,
+    .input-with-icon input,
+    textarea {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .unit {
+        font-size: 12px;
+    }
+
+    .button {
+        font-size: 14px;
+        height: 40px;
+    }
+
+    .trash-icon-wrapper img {
+        width: 18px;
+        height: 20px;
+    }
 }

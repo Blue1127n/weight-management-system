@@ -1,23 +1,44 @@
 .container {
     width: 100%;
-    max-width: 1512px;
-    margin: 0 auto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     background-color: rgba(249, 249, 249, 1);
-    padding: 70px 196px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(249, 249, 249, 1);
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .stats-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 1120px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1120px;
     height: 154px;
-    padding: 30px;
+    padding: 5px;
     gap: 0p;
+    padding: 30px;
     background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .stat-box {
@@ -60,12 +81,13 @@
 }
 
 .main-content {
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    width: 1120px;
-    height: 715px;
+    width: 100%;
+    max-width: 1120px;
+    height: 750px;
     margin: 0 auto;
     padding: 30px;
     border-radius: 10px;
@@ -188,6 +210,25 @@
     margin-left: 20px;
 }
 
+.reset-button {
+    width: 100px;
+    height: 43px;
+    padding: 9.5px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(145, 145, 145, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(145, 145, 145, 1);
+    text-decoration: none;
+}
+
 .add-data-button {
     height: 160px;
     height: 45px;
@@ -215,16 +256,21 @@
 
 .search-result-info {
     left: 0;
-    top: 50px;
+    top: 10px;
     margin-top: 5px;
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 14px;
     font-weight: 300;
     line-height: 21px;
-    text-align: left;
+    text-align: left !important;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: rgba(51, 51, 51, 1);
+    display: block !important;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0;
+    box-sizing: border-box;
 }
 
 .search-conditions {
@@ -405,7 +451,11 @@
 .pagination-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: -10px;
+    border-radius: 5px;
 }
 
 .pagination {
@@ -413,6 +463,16 @@
     justify-content: center;
     list-style: none;
     padding: 0;
+    margin: 0;
+    background: rgba(255, 255, 255, 1);
+}
+
+.pagination .page-link {
+    background: rgba(255, 255, 255, 1);
+    color: rgba(75, 75, 75, 1);
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
 }
 
 .pagination li {
@@ -421,7 +481,17 @@
 
 .pagination a {
     text-decoration: none;
-    color: #333;
+    color: rgba(75, 75, 75, 1);
+}
+
+.pagination a:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.pagination .page-item.active .page-link {
+    background: linear-gradient(to right, #c084fc, #fda4af);
+    color: white;
+    border: none;
 }
 
 .index-modal {
