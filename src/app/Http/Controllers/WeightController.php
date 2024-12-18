@@ -63,12 +63,12 @@ class WeightController extends Controller
     // 体重ログの登録
     public function store(WeightManagementRequest $request)
 {
-    \Log::info('フォーム送信データ:', $request->all()); // 送信データの確認
-
-    // データ登録処理
-    auth()->user()->weightLogs()->create($request->validated());
-
-    return redirect()->route('weight_logs')->with('success', '体重ログを登録しました。');
+    try {
+        auth()->user()->weightLogs()->create($request->validated());
+        return redirect()->route('weight_logs')->with('success', '体重ログを登録しました。');
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return redirect()->back()->withErrors($e->validator)->withInput();
+    }
 }
 
     // 検索機能

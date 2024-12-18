@@ -2,8 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 1512px;
+    height: 100vh;
     width: 100%;
     background-color: rgba(249, 249, 249, 1);
     gap: 30px;
@@ -178,21 +177,19 @@ textarea {
 .button-group {
     display: flex;
     justify-content: center;
-    align-items: center;
     margin-top: 20px;
     gap: 20px;
 }
 
 .center-buttons {
-    display: flex;
     gap: 20px;
+    display: flex;
 }
 
 .delete-form {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    right: 20px; /* 右端から20px */
+    bottom: 100px; /* 下端から20px */
 }
 
 .button {
@@ -200,13 +197,13 @@ textarea {
     text-align: center;
     border: none;
     cursor: pointer;
+    line-height: 50px;
     width: 200px;
     height: 50px;
     font-family: Hiragino Kaku Gothic Pro;
     font-weight: 600;
     gap: 10px;
     border-radius: 12px;
-    text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
@@ -218,6 +215,10 @@ textarea {
     font-size: 16px;
     line-height: 24px;
     padding: 13px 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .save-button {
@@ -229,7 +230,7 @@ textarea {
 }
 
 .trash-icon-wrapper {
-    position: relative;
+    position: absolute;
     width: 30px;
     height: 35px;
 }
@@ -238,11 +239,10 @@ textarea {
     background: transparent;
     border: none;
     cursor: pointer;
+    color: rgba(246, 90, 90, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 20px;
-    color: rgba(246, 90, 90, 1);
 }
 
 .delete-button img {
@@ -263,11 +263,15 @@ textarea {
 }
 
 .base-trash {
+    position: absolute;
+    bottom: 0;
     bottom: 0;
     z-index: 1;
 }
 
 .overlay-trash {
+    position: absolute;
     z-index: 2;
     top: -3px;
+    left: 0;
 }

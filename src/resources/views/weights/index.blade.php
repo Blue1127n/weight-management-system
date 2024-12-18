@@ -180,15 +180,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModalButton = document.getElementById('close-modal');
     const modalForm = modal.querySelector('form');
 
-
+    // セッションのopen_modalがある場合、モーダルを表示
     @if (session('open_modal'))
         modal.classList.remove('hidden');
     @endif
 
-
+    // モーダル表示時の処理
     if (showModalButton && modal && modalForm) {
         showModalButton.addEventListener('click', () => {
-
             fetch("{{ route('clear_old_input') }}", {
                 method: 'POST',
                 headers: {
@@ -197,19 +196,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }).then(response => response.json()).then(data => {
                 if (data.status === 'success') {
-
                     modalForm.reset();
                     modal.classList.remove('hidden');
+
+                    // 日付フィールドに当日の日付を設定
                     const dateField = modalForm.querySelector('input[name="date"]');
                     if (dateField) {
-                        dateField.value = new Date().toISOString().split('T')[0];
+                        const today = new Date();
+                        const formattedDate = today.getFullYear() + '-' +
+                            ('0' + (today.getMonth() + 1)).slice(-2) + '-' +
+                            ('0' + today.getDate()).slice(-2);
+                        dateField.value = formattedDate; // YYYY-MM-DD形式
                     }
                 }
             });
         });
     }
 
-
+    // 「戻る」ボタンの処理
     if (closeModalButton && modal && modalForm) {
         closeModalButton.addEventListener('click', () => {
             modal.classList.add('hidden');
@@ -217,5 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
 </script>
 @endpush
