@@ -1,0 +1,47 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Hiragino Mincho Pro", serif;
+    background-image: url('/images/7cf943613da9360ed1bda08b7d622846.jpg');
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.outer-wrapper {
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/7cf943613da9360ed1bda08b7d622846.jpg');
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .outer-wrapper {
+        min-height: auto;
+        padding: 10px;
+    }
+
+    .main {
+        justify-content: flex-start;
+    }
+}

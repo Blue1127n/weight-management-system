@@ -1,0 +1,199 @@
+.form-container {
+    width: 580px;
+    margin: 40px auto;
+    padding: 40px;
+    gap: 30px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.logo-text {
+    font-family: 'Lora', serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 76.8px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(236, 135, 239, 1);
+    margin-bottom: 10px;
+}
+
+.sub-title {
+    font-family: Hiragino Mincho Pro;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 45px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 500px;
+    height: 43px;
+    padding: 11px 10px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    border-radius: 5px;
+    font-size: 14px;
+    color: rgba(51, 51, 51, 1);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.form-group input::placeholder {
+    color: rgba(205, 205, 205, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.error {
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(246, 90, 90, 1);
+    margin-top: 5px;
+    min-height: 21px;
+}
+
+
+.login-button {
+    width: 250px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    gap: 10px;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+    color: rgba(255, 255, 255, 1);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    font-family: Hiragino Kaku Gothic Pro;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login-button:hover {
+    background: linear-gradient(90deg, #9396d2 0%, #f09dcd 100%);
+}
+
+.register-link {
+    display: block;
+    margin-top: 15px;
+    color: rgba(44, 153, 255, 1);
+    border: 0px 0px 1px 0px;
+    font-family: Hiragino Mincho Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    gap: 10px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .logo-text {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .sub-title {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .form-group input {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .login-button {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .register-link {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .logo-text {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .sub-title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input {
+        font-size: 12px;
+        height: 36px;
+    }
+
+    .login-button {
+        font-size: 16px;
+        height: 45px;
+    }
+
+    .register-link {
+        font-size: 12px;
+    }
+}

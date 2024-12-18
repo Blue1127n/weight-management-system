@@ -1,0 +1,366 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(249, 249, 249, 1);
+    gap: 30px;
+}
+
+.edit-container {
+    width: 100%;
+    max-width: 800px;
+    height: 828px;
+    padding: 30px 20px;
+    gap: 30px;
+    background: rgba(255, 255, 255, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-title {
+    margin-bottom: 20px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+    margin-left: 0px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    width: 100%;
+    height: 43px;
+    padding: 11px 10px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.triangle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: rgba(205, 205, 205, 1);
+    pointer-events: none;
+}
+
+.flatpickr-calendar {
+    z-index: 100;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgba(51, 51, 51, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+}
+
+.input-with-unit {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+}
+
+.input-with-unit input {
+    flex: 1;
+    box-sizing: border-box;
+    width: 730px;
+    height: 43px;
+    padding: 11px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1);
+}
+
+.unit {
+    color: rgba(51, 51, 51, 1);
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    white-space: nowrap;
+}
+
+input {
+    width: 760px;
+    height: 43px;
+    gap: 10px;
+    box-sizing: border-box;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+    padding: 11px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(224, 223, 222, 1);
+    background: rgba(255, 255, 255, 1);
+}
+
+input::placeholder {
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(51, 51, 51, 1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+    pointer-events: none;
+}
+
+textarea {
+    width: 760px;
+    height: 160px;
+    padding: 11px 10px;
+    gap: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(224, 223, 222, 1);
+    resize: none;
+}
+
+.error {
+    color: rgba(246, 90, 90, 1);
+    font-size: 12px;
+    margin-top: 5px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.center-buttons {
+    gap: 20px;
+    display: flex;
+}
+
+.delete-form {
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+}
+
+.button {
+    display: inline-block;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    line-height: 50px;
+    width: 200px;
+    height: 50px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-weight: 600;
+    gap: 10px;
+    border-radius: 12px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.back-button {
+    color: rgba(51, 51, 51, 1);
+    background: rgba(224, 223, 222, 1);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 24px;
+    padding: 13px 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save-button {
+    color: rgba(255, 255, 255, 1);
+    padding: 10px 0px 0px 0px;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.trash-icon-wrapper {
+    position: absolute;
+    width: 30px;
+    height: 35px;
+}
+
+.delete-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(246, 90, 90, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button img {
+    width: 21px;
+    height: 24px;
+}
+
+.delete-button:hover img {
+    filter: brightness(0.7);
+}
+
+.delete-icon {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    color: rgba(246, 90, 90, 1);
+    left: 0;
+}
+
+.base-trash {
+    position: absolute;
+    bottom: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.overlay-trash {
+    position: absolute;
+    z-index: 2;
+    top: -3px;
+    left: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        height: auto;
+        padding: 20px;
+    }
+
+    .edit-container {
+        padding: 20px;
+        height: auto;
+    }
+
+    .container-title {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .input-with-unit input,
+    .input-with-icon input,
+    textarea {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .unit {
+        font-size: 14px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button {
+        width: 100%;
+        font-size: 16px;
+        height: 45px;
+    }
+
+    .delete-form {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .container-title {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .edit-container {
+        padding: 15px;
+    }
+
+    .input-with-unit input,
+    .input-with-icon input,
+    textarea {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .unit {
+        font-size: 12px;
+    }
+
+    .button {
+        font-size: 14px;
+        height: 40px;
+    }
+
+    .trash-icon-wrapper img {
+        width: 18px;
+        height: 20px;
+    }
+}

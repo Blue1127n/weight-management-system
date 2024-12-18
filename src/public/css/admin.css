@@ -1,0 +1,173 @@
+body {
+    width: 1512px;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 0px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(205, 205, 205, 1);
+    background-color: rgba(255, 255, 255, 1);
+    width: 100%;
+    height: 71px;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-family: Lora;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 51.2px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: rgba(236, 135, 239, 1);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav .button {
+    display: flex;
+    width: 160px;
+    height: 44px;
+    margin-left: 10px;
+    background-color: rgba(247, 247, 247, 1);
+    color: rgba(51, 51, 51, 1);
+    padding: 10px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    justify-content: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 1px solid rgba(205, 205, 205, 1);
+    cursor: pointer;
+}
+
+.goal-button .icon {
+    display: flex;
+    align-items: center;
+    width: 22.68px;
+    height: 24px;
+    left: 0.66px;
+    gap: 5px;
+    color: rgba(51, 51, 51, 1);
+}
+
+.goal-button:hover {
+    background-color: rgba(247, 247, 247, 1);
+}
+
+.logout-icon {
+    position: relative;
+    width: 24px;
+    height: 22.93px;
+    top: 0.54px;
+    gap: 0px;
+    color: rgba(51, 51, 51, 1);
+}
+
+.icon-layer {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+}
+
+.icon-layer.door {
+    left: 0;
+    z-index: 1;
+    width: 10.84px;
+    height: 22.93px;
+    top: 0.54px;
+    gap: 0px;
+}
+
+.icon-layer.arrow {
+    left: 12px;
+    z-index: 2;
+    width: 9.2px;
+    height: 6.59px;
+    top: 8.71px;
+    left: 14.8px;
+    gap: 0px;
+}
+
+.icon-layer.bottom {
+    z-index: 3;
+    width: 5.59px;
+    height: 6.86px;
+    top: 14.4px;
+    left: 12.05px;
+    gap: 0px;
+}
+
+.icon-layer.top {
+    z-index: 4;
+    width: 5.59px;
+    height: 6.86px;
+    top: 2.74px;
+    left: 12.05px;
+    gap: 0px;
+}
+
+.logout-button:hover {
+    background-color: rgba(247, 247, 247, 1);
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav .button {
+        width: 100%;
+        max-width: 200px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .goal-button .icon,
+    .icon-layer {
+        width: 16px;
+        height: 16px;
+    }
+
+    .nav .button {
+        font-size: 12px;
+        height: 40px;
+    }
+
+    .logout-button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
