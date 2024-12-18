@@ -29,9 +29,9 @@
       `php artisan migrate`  
 
 ## 使用技術(実行環境)  
-- PHP8.3.11  
-- Laravel8.83.8  
-- MySQL8.0.26  
+- PHP 7.4.9  
+- Laravel 8.83.8  
+- MySQL 10.3.39  
   
 ## ER図  
  ![ER図](src/public/images/ER.svg)
